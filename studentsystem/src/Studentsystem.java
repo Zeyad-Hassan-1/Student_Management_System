@@ -15,8 +15,7 @@ public class Studentsystem {
      */
     public static void main(String[] args) {
         
-        
-        System.out.println("uuu");
+
    
     }
     
