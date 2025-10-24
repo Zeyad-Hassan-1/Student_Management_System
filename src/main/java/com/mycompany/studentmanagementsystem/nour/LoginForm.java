@@ -141,7 +141,7 @@ String pass = new String(txtPass.getPassword());
 if (user.equals("admin") && pass.equals("1234")) {
     javax.swing.JOptionPane.showMessageDialog(this, "Login Successful!");
     this.dispose(); 
-    new MainForm().setVisible(true);
+//    new MainForm().setVisible(true);
 } else {
     javax.swing.JOptionPane.showMessageDialog(this, "Invalid Username or Password");
 }

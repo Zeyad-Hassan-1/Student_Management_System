@@ -4,6 +4,8 @@
 
 package com.mycompany.studentmanagementsystem;
 
+import com.formdev.flatlaf.FlatDarkLaf;
+
 /**
  *
  * @author Mega
@@ -11,6 +13,12 @@ package com.mycompany.studentmanagementsystem;
 public class StudentManagementSystem {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        FlatDarkLaf.setup();
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
     }
 }
