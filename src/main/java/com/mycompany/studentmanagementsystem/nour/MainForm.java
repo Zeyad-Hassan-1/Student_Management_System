@@ -5,6 +5,9 @@
 package com.mycompany.studentmanagementsystem.nour;
 
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+
 
 /**
  *
@@ -21,7 +24,114 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
             setLocationRelativeTo(null); 
 
+try {
+    setTitle("Student Management System - Dashboard");
+    setLocationRelativeTo(null);
+    setResizable(false);
+
+    //  Dark theme base
+    Color bgColor = new Color(20, 20, 25);        // Background
+    Color panelColor = new Color(40, 40, 50);     // Panels & tooltip background
+    Color textColor = new Color(235, 235, 240);   // Light text
+
+    getContentPane().setBackground(bgColor);
+
+
+    if (lblWelcome != null) {
+        lblWelcome.setText("Student Management System");
+        lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        lblWelcome.setForeground(new Color(220, 220, 230));
+        lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
     }
+
+    JButton[] btns = new JButton[] {
+        (btnAddStudent == null ? null : btnAddStudent),
+        (btnViewStudents == null ? null : btnViewStudents),
+        (btnUpdateStudent == null ? null : btnUpdateStudent),
+        (btnDeleteStudent == null ? null : btnDeleteStudent)
+    };
+
+    // Gradient-inspired modern colors 
+    //codes for colors 
+    Color[] colors = new Color[] {
+        new Color(255, 99, 132),   // coral pink 
+        new Color(0, 181, 204),    // bright cyan
+        new Color(155, 89, 182),   // violet purple
+        new Color(255, 159, 67)    // orange
+    };
+
+    for (int idx = 0; idx < btns.length; idx++) {
+        final JButton b = btns[idx];
+        if (b == null) continue;
+        final Color base = colors[idx];
+
+
+        b.setBackground(base);
+        b.setForeground(Color.WHITE);
+        b.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        b.setFocusPainted(false);
+        b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        b.setOpaque(true);
+        b.setBorder(BorderFactory.createCompoundBorder(
+            BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true),
+            BorderFactory.createEmptyBorder(12, 20, 12, 20)
+        ));
+
+  
+        b.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                b.setBackground(base.brighter());
+                b.setForeground(new Color(30, 30, 30));
+                b.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1, true));
+            }
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                b.setBackground(base);
+                b.setForeground(Color.WHITE);
+                b.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true));
+            }
+        });
+    }
+
+
+    if (btnLogout != null) {
+        btnLogout.setBackground(new Color(80, 20, 20));
+        btnLogout.setForeground(new Color(255, 85, 85));
+        btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 20));
+        btnLogout.setFocusPainted(false);
+        btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnLogout.setOpaque(true);
+        btnLogout.setBorder(BorderFactory.createLineBorder(new Color(90, 40, 40), 1));
+
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLogout.setBackground(new Color(200, 50, 50));
+                btnLogout.setForeground(Color.WHITE);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLogout.setBackground(new Color(80, 20, 20));
+                btnLogout.setForeground(new Color(255, 85, 85));
+            }
+        });
+    }
+
+
+    UIManager.put("ToolTip.background", panelColor);
+    UIManager.put("ToolTip.foreground", textColor);
+    UIManager.put("ToolTip.font", new Font("Segoe UI", Font.PLAIN, 13));
+
+} catch (Exception ex) {
+}
+
+ 
+  
+  
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +143,7 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         lblWelcome = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         btnAddStudent = new javax.swing.JButton();
         btnViewStudents = new javax.swing.JButton();
         btnUpdateStudent = new javax.swing.JButton();
@@ -41,9 +152,15 @@ public class MainForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblWelcome.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblWelcome.setText("StudentManagementSystem");
+        lblWelcome.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(102, 255, 255), null, null));
+
+        btnAddStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAddStudent.setText("Add Student");
         btnAddStudent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -51,12 +168,43 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
 
+        btnViewStudents.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnViewStudents.setText("View Students");
 
+        btnUpdateStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnUpdateStudent.setText("Update Student");
 
+        btnDeleteStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDeleteStudent.setText("Delete Student");
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnViewStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnDeleteStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,37 +216,29 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnViewStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDeleteStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addGap(158, 158, 158)
+                .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnAddStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnViewStudents, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdateStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDeleteStudent, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         pack();
@@ -106,6 +246,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -131,6 +272,7 @@ public class MainForm extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -156,12 +298,14 @@ public class MainForm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> new MainForm().setVisible(true));
     }
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JButton btnDeleteStudent;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnUpdateStudent;
     private javax.swing.JButton btnViewStudents;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
 }
