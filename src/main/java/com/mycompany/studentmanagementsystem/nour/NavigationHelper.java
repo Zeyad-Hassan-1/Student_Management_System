@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  *
  * @author afifi.store
  */
-public class NavigationHelper {
+public class NavigationHelper{
 
     public static void goBack(JFrame current, JFrame target) {
         if (current != null) {
