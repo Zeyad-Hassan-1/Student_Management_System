@@ -19,42 +19,36 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
-setLocationRelativeTo(null); // يفتح الفورم في النص
+setLocationRelativeTo(null);
 
-// 🎯 الخلفية العامة
 getContentPane().setBackground(new java.awt.Color(18, 18, 18));
 
-// 🏷️ إعدادات العنوان (Welcome)
 lblWelcome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
 lblWelcome.setForeground(new java.awt.Color(0, 204, 255));
 lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 lblWelcome.setText("Welcome to Student Management System");
 
-// 🧾 إعدادات الـ Labels (Username + Password)
-jLabel1.setForeground(new java.awt.Color(230, 230, 230));
-jLabel2.setForeground(new java.awt.Color(230, 230, 230));
+jLabel1.setForeground(new java.awt.Color(0, 204, 255));
+jLabel2.setForeground(new java.awt.Color(0, 204, 255));
 jLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
 jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
 
-// 🖊️ حقل Username
 txtUser.setBackground(new java.awt.Color(35, 35, 35));
 txtUser.setForeground(new java.awt.Color(0, 255, 255));
 txtUser.setCaretColor(new java.awt.Color(0, 255, 255));
 txtUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
+//        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+//        javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
 ));
 
-// 🔒 حقل Password
 txtPass.setBackground(new java.awt.Color(35, 35, 35));
 txtPass.setForeground(new java.awt.Color(255, 255, 255));
 txtPass.setCaretColor(new java.awt.Color(255, 200, 0));
 txtPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
+//        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+//        javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
 ));
 
-// 🔘 زر تسجيل الدخول
 btnLogin.setBackground(new java.awt.Color(0, 204, 255));
 btnLogin.setForeground(Color.BLACK);
 btnLogin.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
@@ -62,7 +56,6 @@ btnLogin.setFocusPainted(false);
 btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
 btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-// ✨ تأثير Hover على الزر (لون عند المرور بالماوس)
 btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
     @Override
     public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -73,7 +66,8 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
     public void mouseExited(java.awt.event.MouseEvent evt) {
         btnLogin.setBackground(new java.awt.Color(0, 204, 255));
     }
-});
+}
+);
 
 
 
@@ -97,7 +91,6 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
         txtPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -147,13 +140,12 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
         gridBagConstraints.ipadx = 148;
         gridBagConstraints.ipady = 26;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 27, 27, 17);
+        gridBagConstraints.insets = new java.awt.Insets(20, 1, 28, 35);
         getContentPane().add(btnLogin, gridBagConstraints);
 
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -174,7 +166,8 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
         getContentPane().add(txtUser, gridBagConstraints);
 
         txtPass.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPass.setAutoscrolls(false);
+        txtPass.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.darkGray));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -200,18 +193,18 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
         
                                            
 
-    // 🧠 جلب القيم من الحقول
+    
     String user = txtUser.getText().trim();
     String pass = new String(txtPass.getPassword()).trim();
 
-    // ✅ تحقق من اسم المستخدم وكلمة المرور
+
     if (user.equals("admin") && pass.equals("1234")) {
         javax.swing.JOptionPane.showMessageDialog(this, 
             "Login Successful!", 
             "Access Granted", 
             javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-        // اغلاق شاشة الدخول وفتح الرئيسية
+    
         this.dispose();
         new MainForm().setVisible(true);
 
