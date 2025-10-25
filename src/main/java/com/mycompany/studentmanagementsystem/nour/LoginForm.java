@@ -11,7 +11,7 @@ import java.awt.Color;
  * @author afifi.store
  */
 public class LoginForm extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginForm.class.getName());
 
     /**
@@ -19,57 +19,55 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
-setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
 
-getContentPane().setBackground(new java.awt.Color(18, 18, 18));
+        getContentPane().setBackground(new java.awt.Color(18, 18, 18));
 
-lblWelcome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
-lblWelcome.setForeground(new java.awt.Color(0, 204, 255));
-lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-lblWelcome.setText("Welcome to Student Management System");
+        lblWelcome.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+        lblWelcome.setForeground(new java.awt.Color(0, 204, 255));
+        lblWelcome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblWelcome.setText("Welcome to Student Management System");
 
-jLabel1.setForeground(new java.awt.Color(0, 204, 255));
-jLabel2.setForeground(new java.awt.Color(0, 204, 255));
-jLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
-jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+        jLabel1.setForeground(new java.awt.Color(0, 204, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 204, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 16));
 
-txtUser.setBackground(new java.awt.Color(35, 35, 35));
-txtUser.setForeground(new java.awt.Color(0, 255, 255));
-txtUser.setCaretColor(new java.awt.Color(0, 255, 255));
-txtUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
-));
+        txtUser.setBackground(new java.awt.Color(35, 35, 35));
+        txtUser.setForeground(new java.awt.Color(0, 255, 255));
+        txtUser.setCaretColor(new java.awt.Color(0, 255, 255));
+        txtUser.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+                javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
+        ));
 
-txtPass.setBackground(new java.awt.Color(35, 35, 35));
-txtPass.setForeground(new java.awt.Color(255, 255, 255));
-txtPass.setCaretColor(new java.awt.Color(255, 200, 0));
-txtPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
-));
+        txtPass.setBackground(new java.awt.Color(35, 35, 35));
+        txtPass.setForeground(new java.awt.Color(255, 255, 255));
+        txtPass.setCaretColor(new java.awt.Color(255, 200, 0));
+        txtPass.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+                javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
 
-btnLogin.setBackground(new java.awt.Color(0, 204, 255));
-btnLogin.setForeground(Color.BLACK);
-btnLogin.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
-btnLogin.setFocusPainted(false);
-btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
-btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
-    @Override
-    public void mouseEntered(java.awt.event.MouseEvent evt) {
-        btnLogin.setBackground(new java.awt.Color(0, 230, 255));
-    }
-
-    @Override
-    public void mouseExited(java.awt.event.MouseEvent evt) {
         btnLogin.setBackground(new java.awt.Color(0, 204, 255));
-    }
-}
-);
+        btnLogin.setForeground(Color.BLACK);
+        btnLogin.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 18));
+        btnLogin.setFocusPainted(false);
+        btnLogin.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
+        btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new java.awt.Color(0, 230, 255));
+            }
 
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnLogin.setBackground(new java.awt.Color(0, 204, 255));
+            }
+        }
+        );
 
     }
 
@@ -174,41 +172,33 @@ btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
-        
-     
+
+
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         // TODO add your handling code here:
-        
-                                           
+        String user = txtUser.getText().trim();
+        String pass = new String(txtPass.getPassword()).trim();
 
-    
-    String user = txtUser.getText().trim();
-    String pass = new String(txtPass.getPassword()).trim();
+        if (user.equals("admin") && pass.equals("1234")) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Login Successful!",
+                    "Access Granted",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
+            this.dispose();
+            new MainForm().setVisible(true);
 
-    if (user.equals("admin") && pass.equals("1234")) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Login Successful!", 
-            "Access Granted", 
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-    
-        this.dispose();
-        new MainForm().setVisible(true);
-
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Invalid Username or Password!", 
-            "Access Denied", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Invalid Username or Password!",
+                    "Access Denied",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
 
 
-        
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**

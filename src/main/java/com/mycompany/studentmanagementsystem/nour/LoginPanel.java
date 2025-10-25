@@ -18,64 +18,57 @@ import javax.swing.SwingConstants;
  */
 public class LoginPanel extends javax.swing.JPanel {
 
- 
-
     /**
      * Creates new form loginPanel
      */
     public LoginPanel() {
         initComponents();
-    //  setBackground(new Color(240, 242, 245)); // رمادي فاتح
+    
 
+        titleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+        titleLabel.setForeground(new java.awt.Color(0, 204, 255));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Welcome to Student Management System");
 
+        passwordLabel.setForeground(new java.awt.Color(0, 204, 255));
+        usernameLabel.setForeground(new java.awt.Color(0, 204, 255));
+        passwordLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 23));
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 23));
 
+        usernameField.setBackground(new java.awt.Color(35, 35, 35));
+        usernameField.setForeground(new java.awt.Color(0, 255, 255));
+        usernameField.setCaretColor(new java.awt.Color(0, 255, 255));
+        usernameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+                javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
+        ));
 
-titleLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
-titleLabel.setForeground(new java.awt.Color(0, 204, 255));
-titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-titleLabel.setText("Welcome to Student Management System");
+        passwordField.setBackground(new java.awt.Color(35, 35, 35));
+        passwordField.setForeground(new java.awt.Color(255, 255, 255));
+        passwordField.setCaretColor(new java.awt.Color(255, 200, 0));
+        passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(
+                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
+                javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
+        ));
 
-passwordLabel.setForeground(new java.awt.Color(0, 204, 255));
-usernameLabel.setForeground(new java.awt.Color(0, 204, 255));
-passwordLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD,23));
-usernameLabel.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 23));
+        loginButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
+        loginButton.setFocusPainted(false);
+        loginButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
+        loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-usernameField.setBackground(new java.awt.Color(35, 35, 35));
-usernameField.setForeground(new java.awt.Color(0, 255, 255));
-usernameField.setCaretColor(new java.awt.Color(0, 255, 255));
-usernameField.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
-));
+        loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                loginButton.setBackground(new java.awt.Color(0, 230, 255));
+            }
 
-passwordField.setBackground(new java.awt.Color(35, 35, 35));
-passwordField.setForeground(new java.awt.Color(255, 255, 255));
-passwordField.setCaretColor(new java.awt.Color(255, 200, 0));
-passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(
-        javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-        javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
-));
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                loginButton.setBackground(new java.awt.Color(0, 204, 255));
+            }
+        }
+        );
 
-
-
-loginButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
-loginButton.setFocusPainted(false);
-loginButton.setBorder(javax.swing.BorderFactory.createEmptyBorder(8, 15, 8, 15));
-loginButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
-    @Override
-    public void mouseEntered(java.awt.event.MouseEvent evt) {
-        loginButton.setBackground(new java.awt.Color(0, 230, 255));
-    }
-
-    @Override
-    public void mouseExited(java.awt.event.MouseEvent evt) {
-        loginButton.setBackground(new java.awt.Color(0, 204, 255));
-    }
-}
-);
- 
     }
 
     /**
@@ -95,6 +88,7 @@ loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
         loginButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 51));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         titleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -170,7 +164,7 @@ loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
- 
+
 
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -184,16 +178,16 @@ loginButton.addMouseListener(new java.awt.event.MouseAdapter() {
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 
-  public javax.swing.JButton getLoginButton() {
-    return loginButton;
-}
+    public javax.swing.JButton getLoginButton() {
+        return loginButton;
+    }
 
-public String getUsername() {
-    return usernameField.getText().trim();
-}
+    public String getUsername() {
+        return usernameField.getText().trim();
+    }
 
-public String getPassword() {
-    return new String(passwordField.getPassword()).trim();
-}
+    public String getPassword() {
+        return new String(passwordField.getPassword()).trim();
+    }
 
 }

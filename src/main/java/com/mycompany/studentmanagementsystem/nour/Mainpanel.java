@@ -35,8 +35,8 @@ try {
 
  
      
-    Color panelColor = new Color(40, 40, 50);     // Panels & tooltip background
-    Color textColor = new Color(235, 235, 240);   // Light text
+    Color panelColor = new Color(40, 40, 50);    
+    Color textColor = new Color(235, 235, 240);   
 
  
 
@@ -61,7 +61,7 @@ try {
         new Color(255, 99, 132),   // coral pink 
         new Color(0, 181, 204),    // bright cyan
         new Color(155, 89, 182),   // violet purple
-        new Color(255, 159, 67)    // orange
+        new Color(255, 159, 67)   // orange
     };
 
     for (int idx = 0; idx < btns.length; idx++) {
@@ -159,6 +159,7 @@ try {
         btnLogout = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(51, 51, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         lblWelcome.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         lblWelcome.setForeground(new java.awt.Color(51, 204, 255));

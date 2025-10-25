@@ -14,69 +14,69 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
- 
+
 /**
  *
  * @author afifi.store
  */
 public class MainFrame extends javax.swing.JFrame {
-       private CardLayout cardLayout;
+
+    private CardLayout cardLayout;
     private JPanel mainPanel;
     private LoginPanel loginPanel;
     private Mainpanel homePanel;
 
-    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
      * Creates new form MainFrame
      */
-   public MainFrame() {
-    initComponents();
-    setSize(950,500);
-    setTitle("🎓 Student Management System");
+    public MainFrame() {
+        initComponents();
+        setSize(950, 500);
+        setTitle("🎓 Student Management System");
 
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setLocationRelativeTo(null);
-    setResizable(false);
-    setLayout(new BorderLayout());
-    getContentPane().setBackground(new Color(240, 242, 245));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setLayout(new BorderLayout());
+        getContentPane().setBackground(new Color(240, 242, 245));
 
-    cardLayout = new CardLayout();
-    mainPanel = new JPanel(cardLayout);
-    mainPanel.setBackground(new Color(250, 250, 250));
-    mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        cardLayout = new CardLayout();
+        mainPanel = new JPanel(cardLayout);
+        mainPanel.setBackground(new Color(250, 250, 250));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-    // إنشاء شاشة الدخول
-    loginPanel = new LoginPanel();
-    mainPanel.add(loginPanel, "login");
+       
+        loginPanel = new LoginPanel();
+        mainPanel.add(loginPanel, "login");
 
-    // إنشاء الشاشة الرئيسية
-homePanel = new Mainpanel(this);
-    mainPanel.add(homePanel, "home");
 
-    // ربط زر الدخول
-    loginPanel.getLoginButton().addActionListener(e -> {
-        String username = loginPanel.getUsername();
-        String password = loginPanel.getPassword();
+        homePanel = new Mainpanel(this);
+        mainPanel.add(homePanel, "home");
 
-        if (username.equals("admin") && password.equals("1234")) {
-            cardLayout.show(mainPanel, "home");
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(
-                    this,
-                    "Invalid username or password!",
-                    "Login Failed",
-                    javax.swing.JOptionPane.ERROR_MESSAGE
-            );
+
+        loginPanel.getLoginButton().addActionListener(e -> {
+            String username = loginPanel.getUsername();
+            String password = loginPanel.getPassword();
+
+            if (username.equals("admin") && password.equals("1234")) {
+                cardLayout.show(mainPanel, "home");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(
+                        this,
+                        "Invalid username or password!",
+                        "Login Failed",
+                        javax.swing.JOptionPane.ERROR_MESSAGE
+                );
+            }
         }
-    }
-    );
+        );
 
-    add(mainPanel, BorderLayout.CENTER);
-    cardLayout.show(mainPanel, "login");
-    setVisible(true);
-}
+        add(mainPanel, BorderLayout.CENTER);
+        cardLayout.show(mainPanel, "login");
+        setVisible(true);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,16 +126,16 @@ homePanel = new Mainpanel(this);
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
-        
-       
-    }
-public CardLayout getCardLayout() {
-    return cardLayout;
-}
 
-public JPanel getMainPanel() {
-    return mainPanel;
-}
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
