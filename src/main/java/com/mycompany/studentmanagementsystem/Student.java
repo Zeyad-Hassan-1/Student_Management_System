@@ -12,13 +12,10 @@ import java.util.InputMismatchException;
  */
 public class Student {
 
-    public static final int MALE_OPTION = 1;
-    public static final int FEMALE_OPTION = 0;
-
     private int studentId = 0;
     private String fullName;
     private int age = 0;
-    private int gender;
+    private String gender;
     private String department;
     private double GPA = 0.00;
 
@@ -27,12 +24,12 @@ public class Student {
      * @param studentId
      * @param fullName
      * @param age
-     * @param GENDER_OPTION
+     * @param gender
      * @param department
      * @param GPA
      * @throws InputMismatchException
      */
-    public Student(int studentId, String fullName, int age, int GENDER_OPTION, String department, double GPA) throws InputMismatchException {
+    public Student(int studentId, String fullName, int age, String gender, String department, double GPA) throws InputMismatchException {
         this.fullName = fullName;
         this.department = department;
 
@@ -42,7 +39,7 @@ public class Student {
         if (age <= 0) {
             throw new InputMismatchException("Invalid Age: Please enter positive integer");
         }
-        if (GENDER_OPTION != MALE_OPTION && GENDER_OPTION != FEMALE_OPTION) {
+        if (!(gender.equals("male")||gender.equals("female"))) {
             throw new InputMismatchException("Invalid Gender: Please enter either Student.MALE_OPTION or Student.FEMALE_OPTION");
         }
         if (GPA < 0.00f) {
@@ -50,7 +47,7 @@ public class Student {
         }
         this.studentId = studentId;
         this.age = age;
-        this.gender = GENDER_OPTION;
+        this.gender = gender;
         this.GPA = GPA;
     }
 
@@ -88,7 +85,7 @@ public class Student {
     /**
      * @return the gender
      */
-    public int getGender() {
+    public String getGender() {
         return gender;
     }
 
@@ -124,7 +121,6 @@ public class Student {
     }
 
     public String lineRepresentation() {
-        return studentId + "," + fullName + "," + age + "," + ((gender == MALE_OPTION) ? "male" : "female")
-                + "," + department + "," + GPA;
+        return studentId + "," + fullName + "," + age + "," + gender + "," + department + "," + GPA;
     }
 }

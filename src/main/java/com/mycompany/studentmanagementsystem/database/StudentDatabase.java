@@ -97,7 +97,7 @@ public class StudentDatabase {
      * field[0] = (String)studentId; --> to be casted to int
      * field[1] = (String)fullName;
      * field[2] = (String)age; --> to be casted to int
-     * field[3] = (String)gender; --> to be casted to int 
+     * field[3] = (String)gender; 
      * field[4] = (String)department; 
      * field[5] = (String)GPA; --> to be casted to double
      * Total are 6 fields
@@ -116,7 +116,7 @@ public class StudentDatabase {
             return null;
         }
         try {
-            return new Student(Integer.parseInt(fields[0]), fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3]), fields[4], Double.parseDouble(fields[5]));
+            return new Student(Integer.parseInt(fields[0]), fields[1], Integer.parseInt(fields[2]), fields[3], fields[4], Double.parseDouble(fields[5]));
         } catch (NumberFormatException | InputMismatchException e) {
             throw e;
         }
@@ -189,16 +189,16 @@ public class StudentDatabase {
      * @param studentId
      * @param fullName
      * @param age
-     * @param GENDER_OPTION
+     * @param gender
      * @param department
      * @param GPA
      * @throws InputMismatchException in case of any violation to standard Student parameters format or pre-existing ID
      */
-    public void addStudent(int studentId, String fullName, int age, int GENDER_OPTION, String department, double GPA) throws InputMismatchException
+    public void addStudent(int studentId, String fullName, int age, String gender, String department, double GPA) throws InputMismatchException
     {
         try
         {
-           Student student = new Student(studentId,fullName,age,GENDER_OPTION,department,GPA);
+           Student student = new Student(studentId,fullName,age,gender,department,GPA);
             addStudent(student);
         }
         catch(InputMismatchException e)
@@ -211,16 +211,16 @@ public class StudentDatabase {
      * 
      * @param fullName
      * @param age
-     * @param GENDER_OPTION
+     * @param gender
      * @param department
      * @param GPA
      * @throws InputMismatchException in case of any violation to standard Student parameters format
      */
-    public void addStudent(String fullName, int age, int GENDER_OPTION, String department, double GPA) throws InputMismatchException
+    public void addStudent(String fullName, int age, String gender, String department, double GPA) throws InputMismatchException
     {
         try
         {
-           addStudent(getMaxId()+1,fullName,age,GENDER_OPTION,department,GPA);
+           addStudent(getMaxId()+1,fullName,age,gender,department,GPA);
         }
         catch(InputMismatchException e)
         {
@@ -264,7 +264,7 @@ public class StudentDatabase {
      * @param studentId
      * @param fullName
      * @param age
-     * @param GENDER_OPTION
+     * @param gender
      * @param department
      * @param GPA
      * @throws InputMismatchException 
