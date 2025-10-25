@@ -14,11 +14,11 @@ public class NavigationHelper{
 
     public static void goBack(JFrame current, JFrame target) {
         if (current != null) {
-            current.dispose(); // close the current frame---------------------------+
+            current.dispose(); // close the current frame---------------------------
         }
 
         if (target != null) {
-            target.setVisible(true); // open the target frame-------------------------------------------
+            target.setVisible(true); // open the target frame-----------------------
             target.setLocationRelativeTo(null); // center it
         }
     }
