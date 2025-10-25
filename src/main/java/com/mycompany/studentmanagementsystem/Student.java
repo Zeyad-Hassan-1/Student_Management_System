@@ -20,9 +20,9 @@ public class Student {
     private int age = 0;
     private int gender;
     private String department;
-    private float GPA =0.00f;
+    private double GPA =0.00;
 
-    public Student(int studentID, String fullName, int age, int GENDER_OPTION, String department, float GPA) throws InputMismatchException {
+    public Student(int studentID, String fullName, int age, int GENDER_OPTION, String department, double GPA) throws InputMismatchException {
         this.fullName = fullName;
         this.department = department;
         
@@ -135,7 +135,7 @@ public class Student {
     /**
      * @return the GPA
      */
-    public float getGPA() {
+    public double getGPA() {
         return GPA;
     }
 
