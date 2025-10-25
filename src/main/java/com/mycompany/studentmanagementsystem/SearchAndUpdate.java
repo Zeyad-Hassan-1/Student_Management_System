@@ -20,12 +20,16 @@ public class SearchAndUpdate extends javax.swing.JPanel {
 
     private final Color originalSelectionColor;
     private boolean isHighlighted = false;
+    private int editingModelRow = -1;
+    TableModel model;
+
 
     /**
      * Creates new form SearchAndUpdate
      */
     public SearchAndUpdate() {
         initComponents();
+        this.model = students.getModel();
         originalSelectionColor = students.getSelectionBackground();
         ImageIcon searchIcon = new ImageIcon(
                 getClass().getResource("/search.png") // ← note the leading "/"
@@ -205,6 +209,7 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         jPanel1Layout.rowWeights = new double[] {0.3125, 0.03125, 0.3125, 0.03125, 0.3125};
         updateForm.setLayout(jPanel1Layout);
 
+        id.setEditable(false);
         id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 idActionPerformed(evt);
@@ -306,6 +311,11 @@ public class SearchAndUpdate extends javax.swing.JPanel {
 
         updateButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         updateButton.setText("UPDATE");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -332,18 +342,17 @@ public class SearchAndUpdate extends javax.swing.JPanel {
     private void studentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_studentsMouseClicked
         // TODO add your handling code here:
         int viewRow = students.rowAtPoint(evt.getPoint());
-        int col = students.columnAtPoint(evt.getPoint());
         int modelRow = students.convertRowIndexToModel(viewRow);
 
-        TableModel model = students.getModel();
         Integer id = (Integer) model.getValueAt(modelRow, 0);
         String fullName = model.getValueAt(modelRow, 1).toString();
         Integer age = (Integer) model.getValueAt(modelRow, 2);
         String gender = model.getValueAt(modelRow, 3).toString();
         String department = model.getValueAt(modelRow, 4).toString();
         Float gpa = (Float) model.getValueAt(modelRow, 5);
-
-        update(id, fullName, age, gender, department, gpa);
+        
+        loadUpdateForm(id, fullName, age, gender, department, gpa);
+        editingModelRow = modelRow ;
     }//GEN-LAST:event_studentsMouseClicked
 
     private void departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentActionPerformed
@@ -357,7 +366,12 @@ public class SearchAndUpdate extends javax.swing.JPanel {
 
     }//GEN-LAST:event_searchActionPerformed
 
-    public void update(int id, String fullName, int age, String gender, String department, float gpa) {
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+        update(editingModelRow);
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void loadUpdateForm(int id, String fullName, int age, String gender, String department, float gpa) {
         // 1. Fill the form fields
         this.id.setText(String.valueOf(id));
         this.fullName.setText(fullName);
@@ -371,28 +385,25 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         revalidate();
         repaint();
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField age;
-    private javax.swing.JTextField department;
-    private javax.swing.JTextField fullName;
-    private javax.swing.JComboBox<String> gender;
-    private javax.swing.JTextField gpa;
-    private javax.swing.JTextField id;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton search;
-    private javax.swing.JTextField searchField;
-    private javax.swing.JTable students;
-    private javax.swing.JButton updateButton;
-    private javax.swing.JPanel updateForm;
-    // End of variables declaration//GEN-END:variables
-
+    
+    private void update(int modelRow){
+        int id = Integer.parseInt(this.id.getText());
+        String fullName = this.fullName.getText();
+        int age = Integer.parseInt(this.age.getText());
+        String gender = this.gender.getSelectedItem().toString();
+        String department = this.department.getText();
+        float gpa = Float.parseFloat(this.gpa.getText());
+        
+        model.setValueAt(id, modelRow,0);
+        model.setValueAt(fullName, modelRow,1);
+        model.setValueAt(age, modelRow,2);
+        model.setValueAt(gender, modelRow,3);
+        model.setValueAt(department, modelRow,4);
+        model.setValueAt(gpa, modelRow,4);
+        
+        //call update database function
+    }
+    
     private void searchAndHighlight(String term) {
         if (term == null || term.trim().isEmpty()) {
             if (isHighlighted) {
@@ -423,4 +434,27 @@ public class SearchAndUpdate extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(this, "Not found");
     }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField age;
+    private javax.swing.JTextField department;
+    private javax.swing.JTextField fullName;
+    private javax.swing.JComboBox<String> gender;
+    private javax.swing.JTextField gpa;
+    private javax.swing.JTextField id;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton search;
+    private javax.swing.JTextField searchField;
+    private javax.swing.JTable students;
+    private javax.swing.JButton updateButton;
+    private javax.swing.JPanel updateForm;
+    // End of variables declaration//GEN-END:variables
+
 }
