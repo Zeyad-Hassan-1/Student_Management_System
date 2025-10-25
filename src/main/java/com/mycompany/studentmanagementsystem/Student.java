@@ -150,5 +150,9 @@ public class Student {
         this.GPA = GPA;
     }
     
-    
+    public String lineRepresentation()
+    {
+        return studentID + "," + fullName + "," + age + "," + ((gender==MALE_OPTION)?"male":"female")
+                + "," + department + "," + GPA;
+    }
 }
