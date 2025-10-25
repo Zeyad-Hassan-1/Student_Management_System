@@ -4,8 +4,6 @@
  */
 package com.mycompany.studentmanagementsystem;
 
-import java.util.InputMismatchException;
-
 /**
  *
  * @author Hazem
@@ -27,23 +25,23 @@ public class Student {
      * @param gender
      * @param department
      * @param GPA
-     * @throws InputMismatchException
+     * @throws IllegalArgumentException
      */
-    public Student(int studentId, String fullName, int age, String gender, String department, double GPA) throws InputMismatchException {
+    public Student(int studentId, String fullName, int age, String gender, String department, double GPA) throws IllegalArgumentException {
         this.fullName = fullName;
         this.department = department;
 
         if (studentId <= 0) {
-            throw new InputMismatchException("Invalid Student Id: Please enter positive integer");
+            throw new IllegalArgumentException("Invalid Student Id: Please enter positive integer");
         }
         if (age <= 0) {
-            throw new InputMismatchException("Invalid Age: Please enter positive integer");
+            throw new IllegalArgumentException("Invalid Age: Please enter positive integer");
         }
-        if (!(gender.equals("male")||gender.equals("female"))) {
-            throw new InputMismatchException("Invalid Gender: Please enter either Student.MALE_OPTION or Student.FEMALE_OPTION");
+        if (!(gender.equals("male") || gender.equals("female"))) {
+            throw new IllegalArgumentException("Invalid Gender: Please enter either Student.MALE_OPTION or Student.FEMALE_OPTION");
         }
         if (GPA < 0.00f) {
-            throw new InputMismatchException("Invalid GPA: Please enter non-negative decimal number");
+            throw new IllegalArgumentException("Invalid GPA: Please enter non-negative decimal number");
         }
         this.studentId = studentId;
         this.age = age;
@@ -75,9 +73,9 @@ public class Student {
     /**
      * @param age the age to set
      */
-    public void setAge(int age) throws InputMismatchException {
+    public void setAge(int age) throws IllegalArgumentException {
         if (age <= 0) {
-            throw new InputMismatchException("Invalid Age: Please enter positive integer");
+            throw new IllegalArgumentException("Invalid Age: Please enter positive integer");
         }
         this.age = age;
     }
@@ -113,9 +111,9 @@ public class Student {
     /**
      * @param GPA the GPA to set
      */
-    public void setGPA(double GPA) throws InputMismatchException {
+    public void setGPA(double GPA) throws IllegalArgumentException {
         if (GPA < 0.00f) {
-            throw new InputMismatchException("Invalid GPA: Please enter non-negative decimal number");
+            throw new IllegalArgumentException("Invalid GPA: Please enter non-negative decimal number");
         }
         this.GPA = GPA;
     }
