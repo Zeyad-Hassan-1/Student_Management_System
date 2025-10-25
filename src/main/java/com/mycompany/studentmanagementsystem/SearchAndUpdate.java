@@ -4,8 +4,10 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -16,17 +18,21 @@ import javax.swing.table.TableRowSorter;
  */
 public class SearchAndUpdate extends javax.swing.JPanel {
 
+    private final Color originalSelectionColor;
+    private boolean isHighlighted = false;
+
     /**
      * Creates new form SearchAndUpdate
      */
     public SearchAndUpdate() {
         initComponents();
+        originalSelectionColor = students.getSelectionBackground();
         ImageIcon searchIcon = new ImageIcon(
                 getClass().getResource("/search.png") // ← note the leading "/"
         );
         ImageIcon SearchSmallIcon = IconUtils.resizeIcon(searchIcon, 24, 24);
         search.setIcon(SearchSmallIcon);
-        
+
         ImageIcon updateIcon = new ImageIcon(
                 getClass().getResource("/updated.png") // ← note the leading "/"
         );
@@ -54,7 +60,7 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         sorter.setSortable(5, true);  // GPA
         sorter.setSortable(6, false);  // update
         students.setRowSorter(sorter);
-        
+
         this.updateForm.setVisible(false);
     }
 
@@ -68,7 +74,7 @@ public class SearchAndUpdate extends javax.swing.JPanel {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jTextField1 = new javax.swing.JTextField();
+        searchField = new javax.swing.JTextField();
         search = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         students = new javax.swing.JTable();
@@ -97,10 +103,15 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        add(jTextField1, gridBagConstraints);
+        add(searchField, gridBagConstraints);
 
         search.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -116,6 +127,35 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         students.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(100), "Zeyad Hassan",  new Integer(20), "Male", "CCE",  new Float(3.7), "update"},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 { new Integer(101), "Mohamed Hassan",  new Integer(23), "Male", "CSE",  new Float(3.9), "update"}
             },
             new String [] {
@@ -138,7 +178,6 @@ public class SearchAndUpdate extends javax.swing.JPanel {
             }
         });
         students.setAutoscrolls(false);
-        students.setColumnSelectionAllowed(true);
         students.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         students.setRowHeight(40);
         students.setSelectionBackground(new java.awt.Color(30, 30, 30));
@@ -295,35 +334,42 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         int viewRow = students.rowAtPoint(evt.getPoint());
         int col = students.columnAtPoint(evt.getPoint());
         int modelRow = students.convertRowIndexToModel(viewRow);
-        
+
         TableModel model = students.getModel();
-        int id = (int) model.getValueAt(modelRow, 0);
+        Integer id = (Integer) model.getValueAt(modelRow, 0);
         String fullName = model.getValueAt(modelRow, 1).toString();
-        int age = (int) model.getValueAt(modelRow, 2);
+        Integer age = (Integer) model.getValueAt(modelRow, 2);
         String gender = model.getValueAt(modelRow, 3).toString();
         String department = model.getValueAt(modelRow, 4).toString();
-        float gpa = (float) model.getValueAt(modelRow, 5);
-        
-        update(id,fullName,age,gender,department,gpa);
+        Float gpa = (Float) model.getValueAt(modelRow, 5);
+
+        update(id, fullName, age, gender, department, gpa);
     }//GEN-LAST:event_studentsMouseClicked
 
     private void departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_departmentActionPerformed
 
-    public void update(int id, String fullName, int age, String gender, String department, float gpa){
-            // 1. Fill the form fields
-    this.id.setText(String.valueOf(id));
-    this.fullName.setText(fullName);
-    this.age.setText(String.valueOf(age));
-    this.department.setText(department);
-    this.gpa.setText(String.valueOf(gpa));
-    this.gender.setSelectedItem(gender);
-    updateForm.setVisible(true);
-    
-    // 3. Optional: Scroll to the form if your panel is tall
-    revalidate();
-    repaint();
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        String key = searchField.getText();
+        searchAndHighlight(key);
+
+    }//GEN-LAST:event_searchActionPerformed
+
+    public void update(int id, String fullName, int age, String gender, String department, float gpa) {
+        // 1. Fill the form fields
+        this.id.setText(String.valueOf(id));
+        this.fullName.setText(fullName);
+        this.age.setText(String.valueOf(age));
+        this.department.setText(department);
+        this.gpa.setText(String.valueOf(gpa));
+        this.gender.setSelectedItem(gender);
+        updateForm.setVisible(true);
+
+        // 3. Optional: Scroll to the form if your panel is tall
+        revalidate();
+        repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -340,10 +386,41 @@ public class SearchAndUpdate extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton search;
+    private javax.swing.JTextField searchField;
     private javax.swing.JTable students;
     private javax.swing.JButton updateButton;
     private javax.swing.JPanel updateForm;
     // End of variables declaration//GEN-END:variables
+
+    private void searchAndHighlight(String term) {
+        if (term == null || term.trim().isEmpty()) {
+            if (isHighlighted) {
+                students.setSelectionBackground(originalSelectionColor);
+                students.clearSelection();
+                isHighlighted = false;
+            }
+            return;
+        }
+
+        TableModel model = students.getModel();
+        for (int modelRow = 0; modelRow < model.getRowCount(); modelRow++) {
+            Integer id = (Integer) model.getValueAt(modelRow, 0);
+            String name = (String) model.getValueAt(modelRow, 1);
+
+            if (term.equals(String.valueOf(id))
+                    || (name != null && name.toLowerCase().equals(term.toLowerCase()))) {
+
+                // highlight using cutom color
+                students.setSelectionBackground(new Color(98, 151, 85));
+                int viewRow = students.convertRowIndexToView(modelRow);
+                students.setRowSelectionInterval(viewRow, viewRow);
+                students.scrollRectToVisible(students.getCellRect(viewRow, 0, true));
+                isHighlighted = true;
+                return;
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Not found");
+    }
 }
