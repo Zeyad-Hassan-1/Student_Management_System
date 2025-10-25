@@ -6,17 +6,18 @@ package com.mycompany.studentmanagementsystem;
 
 
 import com.mycompany.studentmanagementsystem.nour.LoginForm;
+import com.mycompany.studentmanagementsystem.nour.MainFrame;
 
 /**
  *
  * @author Mega
  */
+  
 public class StudentManagementSystem {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
         
         
-                new LoginForm().setVisible(true);
+         new MainFrame().setVisible(true);
     }
 }
