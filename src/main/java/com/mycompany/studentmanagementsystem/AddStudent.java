@@ -7,6 +7,7 @@ package com.mycompany.studentmanagementsystem;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import com.mycompany.studentmanagementsystem.nour.MainFrame;
 import java.io.FileNotFoundException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,8 +24,16 @@ public class AddStudent extends javax.swing.JPanel {
     public AddStudent(MainFrame mainFrame) throws FileNotFoundException {
         this.mainFrame = mainFrame;
         initComponents();
-        database = new StudentDatabase("students.txt");
-        database.readFromFile();
+        try
+        {
+            database = new StudentDatabase("students.txt");
+            database.readFromFile();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(this,e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+            showHome();
+        }
         btnMale.setSelected(true);
     }
 

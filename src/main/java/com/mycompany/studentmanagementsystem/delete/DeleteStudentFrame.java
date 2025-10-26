@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package studentmanagment.gui.delete;
+package com.mycompany.studentmanagementsystem.delete;
 
 import com.mycompany.studentmanagementsystem.Student;
 import javax.swing.JOptionPane;
@@ -203,7 +203,11 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new DeleteStudentFrame().setVisible(true);
+                try {
+                    new DeleteStudentFrame().setVisible(true);
+                } catch (FileNotFoundException ex) {
+                    System.getLogger(DeleteStudentFrame.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                }
             }
         });
     }

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.studentmanagementsystem;
+package com.mycompany.studentmanagementsystem.inputverifiers;
 
 /**
  *
@@ -92,6 +92,24 @@ public class Validation {
     
     public static boolean isAge(int age)
     {
-        return age>0;
+        return isPositiveInt(age);
+    }
+    
+    public static boolean isGPA(String GPA)
+    {
+        if(!isFloat(GPA))
+        {
+            return false;
+        }
+        return isGPA(Double.parseDouble(GPA));
+    }
+    
+    public static boolean isAge(String age)
+    {
+        if(!isInt(age))
+        {
+            return false;
+        }
+        return isAge(Integer.parseInt(age));
     }
 }

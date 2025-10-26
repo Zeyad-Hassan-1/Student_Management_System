@@ -57,7 +57,7 @@ public class Student {
     {
         if(fullName == null || fullName.trim().equals(""))
         {
-            throw new IllegalArgumentException("Invalid Department field");
+            throw new IllegalArgumentException("Invalid Name field");
         }
         if (studentId <= 0) {
             throw new IllegalArgumentException("Invalid Student Id: Please enter positive integer");
