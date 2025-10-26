@@ -4,11 +4,14 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import com.mycompany.studentmanagementsystem.Shared.FormatTable;
+import com.mycompany.studentmanagementsystem.Shared.IconUtils;
+import com.mycompany.studentmanagementsystem.Shared.LoadData;
+import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import com.mycompany.studentmanagementsystem.nour.MainFrame;
 import java.awt.Color;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -44,40 +47,21 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         studentDatabase = new StudentDatabase("students.txt");
         studentDatabase.readFromFile();
         this.model = (DefaultTableModel) students.getModel();
-        loadStudentsIntoTable(studentDatabase.returnAllStudents());
+        LoadData.loadStudentsIntoTable(studentDatabase.returnAllStudents(), model);
         originalSelectionColor = students.getSelectionBackground();
         ImageIcon searchIcon = new ImageIcon(
-                getClass().getResource("/search.png") // ← note the leading "/"
-        );
+                getClass().getResource("/search.png"));
         ImageIcon SearchSmallIcon = IconUtils.resizeIcon(searchIcon, 24, 24);
         search.setIcon(SearchSmallIcon);
 
         ImageIcon updateIcon = new ImageIcon(
-                getClass().getResource("/updated.png") // ← note the leading "/"
-        );
+                getClass().getResource("/updated.png"));
         ImageIcon UpdateSmallIcon = IconUtils.resizeIcon(updateIcon, 24, 24);
         updateButton.setIcon(UpdateSmallIcon);
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        FormatTable.center(students);
 
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        // Apply to all columns
-        for (int i = 0; i < students.getColumnCount(); i++) {
-            students.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-
-        // 1. Create a custom sorter
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(students.getModel());
-
-        // 2. Configure it
-        sorter.setSortable(0, true);   // ID
-        sorter.setSortable(1, true);   // Name
-        sorter.setSortable(2, false);  // Age
-        sorter.setSortable(3, false);  // Gender
-        sorter.setSortable(4, false);  // Department
-        sorter.setSortable(5, true);  // GPA
-        students.setRowSorter(sorter);
+        FormatTable.customizeSorter(students);
 
         this.updateForm.setVisible(false);
     }
@@ -420,7 +404,7 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        showHome();
+        SwitchPanels.showHome(mainFrame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void loadUpdateForm(int id, String fullName, int age, String gender, String department, double gpa) {
@@ -488,26 +472,6 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Not found");
     }
 
-    public void loadStudentsIntoTable(ArrayList<Student> studentList) {
-        // 1. Get the table model
-
-        // 2. Clear existing rows
-        model.setRowCount(0);
-
-        // 3. Add each student as a row
-        for (Student s : studentList) {
-            Object[] row = {
-                s.getStudentId(),
-                s.getFullName(),
-                s.getAge(),
-                s.getGender(),
-                s.getDepartment(),
-                s.getGPA()
-            };
-            model.addRow(row);
-        }
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
     private javax.swing.JTextField department;
@@ -531,7 +495,4 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
     private javax.swing.JPanel updateForm;
     // End of variables declaration//GEN-END:variables
 
-    public void showHome() {
-        mainFrame.getCardLayout().show(mainFrame.getMainPanel(), "home");
-    }
 }

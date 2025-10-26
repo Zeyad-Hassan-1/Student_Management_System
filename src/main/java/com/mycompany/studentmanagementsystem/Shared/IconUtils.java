@@ -1,4 +1,4 @@
-package com.mycompany.studentmanagementsystem;
+package com.mycompany.studentmanagementsystem.Shared;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;

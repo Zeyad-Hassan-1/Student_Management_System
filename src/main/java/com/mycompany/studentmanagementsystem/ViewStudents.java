@@ -4,6 +4,9 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import com.mycompany.studentmanagementsystem.Shared.FormatTable;
+import com.mycompany.studentmanagementsystem.Shared.LoadData;
+import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import com.mycompany.studentmanagementsystem.nour.MainFrame;
 import java.io.FileNotFoundException;
@@ -36,27 +39,11 @@ public final class ViewStudents extends javax.swing.JPanel {
         studentDatabase = new StudentDatabase("students.txt");
         studentDatabase.readFromFile();
         this.model = (DefaultTableModel) students.getModel();
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        LoadData.loadStudentsIntoTable(studentDatabase.returnAllStudents(), model);
 
-        loadStudentsIntoTable(studentDatabase.returnAllStudents());
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-
-        // Apply to all columns
-        for (int i = 0; i < students.getColumnCount(); i++) {
-            students.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-        }
-
-        // 1. Create a custom sorter
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(students.getModel());
-
-        // 2. Configure it
-        sorter.setSortable(0, true);   // ID
-        sorter.setSortable(1, true);   // Name
-        sorter.setSortable(2, false);  // Age
-        sorter.setSortable(3, false);  // Gender
-        sorter.setSortable(4, false);  // Department
-        sorter.setSortable(5, true);  // GPA
-        students.setRowSorter(sorter);
+        FormatTable.center(students);
+        
+        FormatTable.customizeSorter(students);
     }
 
     /**
@@ -177,28 +164,9 @@ public final class ViewStudents extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        showHome();
+        SwitchPanels.showHome(mainFrame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    public void loadStudentsIntoTable(ArrayList<Student> studentList) {
-        // 1. Get the table model
-
-        // 2. Clear existing rows
-        model.setRowCount(0);
-
-        // 3. Add each student as a row
-        for (Student s : studentList) {
-            Object[] row = {
-                s.getStudentId(),
-                s.getFullName(),
-                s.getAge(),
-                s.getGender(),
-                s.getDepartment(),
-                s.getGPA()
-            };
-            model.addRow(row);
-        }
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -206,9 +174,5 @@ public final class ViewStudents extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable students;
     // End of variables declaration//GEN-END:variables
-
-    public void showHome() {
-        mainFrame.getCardLayout().show(mainFrame.getMainPanel(), "home");
-    }
 
 }
