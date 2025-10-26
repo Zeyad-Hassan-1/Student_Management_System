@@ -31,11 +31,7 @@ public class StudentDatabase {
 
         this.fileName = fileName;
         database = new ArrayList<>();
-        try {
-            this.readFromFile();
-        } catch (FileNotFoundException | NullPointerException e) {
-            throw e;
-        }
+        this.readFromFile();
     }
 
     public String getFileName() {
@@ -81,8 +77,6 @@ public class StudentDatabase {
             }
         } catch (FileNotFoundException e) {
             throw new FileNotFoundException("File not found: " + this.fileName);
-        } catch (IllegalArgumentException e) {
-            throw e;
         }
     }
 
@@ -108,11 +102,9 @@ public class StudentDatabase {
         if (fields.length != 6) {
             return null;
         }
-        try {
-            return new Student(Integer.parseInt(fields[0]), fields[1], Integer.parseInt(fields[2]), fields[3], fields[4], Double.parseDouble(fields[5]));
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        
+        return new Student(Integer.parseInt(fields[0]), fields[1], Integer.parseInt(fields[2]), fields[3], fields[4], Double.parseDouble(fields[5]));
+        
     }
 
     /**
@@ -136,7 +128,8 @@ public class StudentDatabase {
      * @return ArrayList<Student> representing the database
      */
     public ArrayList<Student> returnAllStudents() {
-        return this.database;
+        ArrayList<Student> databaseCopy = new ArrayList<>(this.database);
+        return databaseCopy;
     }
 
     /**
@@ -190,12 +183,8 @@ public class StudentDatabase {
      * Student parameters format or pre-existing ID
      */
     public void addStudent(int studentId, String fullName, int age, String gender, String department, double GPA) throws IllegalArgumentException {
-        try {
-            Student student = new Student(studentId, fullName, age, gender, department, GPA);
-            addStudent(student);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        Student student = new Student(studentId, fullName, age, gender, department, GPA);
+        addStudent(student);
     }
 
     /**
@@ -209,11 +198,7 @@ public class StudentDatabase {
      * Student parameters format
      */
     public void addStudent(String fullName, int age, String gender, String department, double GPA) throws IllegalArgumentException {
-        try {
-            addStudent(getMaxId() + 1, fullName, age, gender, department, GPA);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        addStudent(getMaxId() + 1, fullName, age, gender, department, GPA);
     }
 
     /**
@@ -259,13 +244,10 @@ public class StudentDatabase {
         if (target == null) {
             throw new IllegalArgumentException("Error: " + studentId + " Doesn't Exist!");
         }
-        try {
-            target.setAge(age);
-            target.setDepartment(department);
-            target.setGPA(GPA);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        
+        target.setAge(age);
+        target.setDepartment(department);
+        target.setGPA(GPA);
     }
 
     /**
@@ -279,11 +261,9 @@ public class StudentDatabase {
         if (target == null) {
             throw new IllegalArgumentException("Error: " + studentId + " Doesn't Exist!");
         }
-        try {
-            target.setAge(age);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+      
+        target.setAge(age);
+      
     }
 
     /**
@@ -297,11 +277,7 @@ public class StudentDatabase {
         if (target == null) {
             throw new IllegalArgumentException("Error: " + studentId + " Doesn't Exist!");
         }
-        try {
-            target.setGPA(GPA);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        target.setGPA(GPA);
     }
 
     /**
@@ -315,11 +291,7 @@ public class StudentDatabase {
         if (target == null) {
             throw new IllegalArgumentException("Error: " + studentId + " Doesn't Exist!");
         }
-        try {
-            target.setDepartment(department);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+        target.setDepartment(department);
     }
 
 }
