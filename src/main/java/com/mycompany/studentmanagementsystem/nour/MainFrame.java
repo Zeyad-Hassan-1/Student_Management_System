@@ -33,12 +33,12 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-  
+        setSize(950, 500);
         setTitle("🎓 Student Management System");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-      
+
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(240, 242, 245));
 
