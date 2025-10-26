@@ -8,6 +8,7 @@ import com.mycompany.studentmanagementsystem.Student;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,12 +29,24 @@ public class StudentDatabase {
      * invalid line format in the file
      */
     public StudentDatabase(String fileName) throws FileNotFoundException, NullPointerException {
-
         this.fileName = fileName;
+        createFileIfNotExists(fileName);
         database = new ArrayList<>();
         this.readFromFile();
     }
 
+        private void createFileIfNotExists(String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            try {
+                file.createNewFile(); // Creates an empty file
+                System.out.println("Created new file: " + fileName);
+            } catch (IOException e) {
+                System.err.println("Failed to create file: " + fileName);
+            }
+        }
+    }
+        
     public String getFileName() {
         return fileName;
     }
