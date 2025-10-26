@@ -10,6 +10,20 @@ package com.mycompany.studentmanagementsystem;
  */
 public class Student {
 
+    /**
+     * @param fullName the fullName to set
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     private int studentId = 0;
     private String fullName;
     private int age = 0;
@@ -146,6 +160,6 @@ public class Student {
     }
 
     public String lineRepresentation() {
-        return studentId + "," + fullName + "," + age + "," + gender + "," + department + "," + GPA;
+        return studentId + "," + getFullName() + "," + age + "," + getGender() + "," + department + "," + GPA;
     }
 }
