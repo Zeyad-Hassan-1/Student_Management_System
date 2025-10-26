@@ -4,26 +4,20 @@
 
 package com.mycompany.studentmanagementsystem;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import com.mycompany.studentmanagementsystem.nour.LoginForm;
+import com.mycompany.studentmanagementsystem.nour.MainFrame;
 
 /**
  *
  * @author Mega
  */
+  
 public class StudentManagementSystem {
 
     public static void main(String[] args) {
-        FlatDarkLaf.setup();
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new MainFrame().setVisible(true);
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(StudentManagementSystem.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        
+        
+         new MainFrame().setVisible(true);
     }
 }
