@@ -8,7 +8,6 @@ import com.mycompany.studentmanagementsystem.Student;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
-import com.mycompany.studentmanagementsystem.StudentManagementSystem;
 import java.io.FileNotFoundException;
 import java.util.List;
 
