@@ -5,6 +5,7 @@
 package com.mycompany.studentmanagementsystem;
 
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
+import com.mycompany.studentmanagementsystem.nour.MainFrame;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import javax.swing.JLabel;
@@ -19,18 +20,22 @@ import javax.swing.table.TableRowSorter;
  */
 public final class ViewStudents extends javax.swing.JPanel {
 
+    private MainFrame mainFrame; // Add this field
     private final StudentDatabase studentDatabase;
     DefaultTableModel model;
 
     /**
      * Creates new form ViewStudents
+     *
+     * @param mainFrame
      * @throws java.io.FileNotFoundException
      */
-    public ViewStudents() throws FileNotFoundException {
+    public ViewStudents(MainFrame mainFrame) throws FileNotFoundException {
+        this.mainFrame = mainFrame; // Store the reference
         initComponents();
         studentDatabase = new StudentDatabase("students.txt");
         studentDatabase.readFromFile();
-        this.model = (DefaultTableModel)students.getModel();
+        this.model = (DefaultTableModel) students.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 
         loadStudentsIntoTable(studentDatabase.returnAllStudents());
@@ -172,6 +177,7 @@ public final class ViewStudents extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        showHome();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void loadStudentsIntoTable(ArrayList<Student> studentList) {
@@ -200,4 +206,9 @@ public final class ViewStudents extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable students;
     // End of variables declaration//GEN-END:variables
+
+    public void showHome() {
+        mainFrame.getCardLayout().show(mainFrame.getMainPanel(), "home");
+    }
+
 }

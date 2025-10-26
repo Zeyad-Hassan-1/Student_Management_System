@@ -19,117 +19,108 @@ import javax.swing.UIManager;
  * @author afifi.store
  */
 public class Mainpanel extends javax.swing.JPanel {
-private MainFrame parentFrame;
+
+    private MainFrame parentFrame;
+
     /**
      * Creates new form Mainpanel
      */
     public Mainpanel(MainFrame parentFrame) {
-           this.parentFrame = parentFrame;
+        this.parentFrame = parentFrame;
         initComponents();
 
+        try {
 
-                 
+            Color panelColor = new Color(40, 40, 50);
+            Color textColor = new Color(235, 235, 240);
 
-try {
-  
+            if (lblWelcome != null) {
+                lblWelcome.setText("Student Management System");
+                lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 36));
 
- 
-     
-    Color panelColor = new Color(40, 40, 50);    
-    Color textColor = new Color(235, 235, 240);   
-
- 
-
-
-    if (lblWelcome != null) {
-        lblWelcome.setText("Student Management System");
-        lblWelcome.setFont(new Font("Segoe UI", Font.BOLD, 36));
-    
-   
-    }
-
-    JButton[] btns = new JButton[] {
-        (btnAddStudent == null ? null : btnAddStudent),
-        (btnViewStudents == null ? null : btnViewStudents),
-        (btnUpdateStudent == null ? null : btnUpdateStudent),
-        (btnDeleteStudent == null ? null : btnDeleteStudent)
-    };
-
-    // Gradient-inspired modern colors 
-    //codes for colors 
-    Color[] colors = new Color[] {
-        new Color(255, 99, 132),   // coral pink 
-        new Color(0, 181, 204),    // bright cyan
-        new Color(155, 89, 182),   // violet purple
-        new Color(255, 159, 67)   // orange
-    };
-
-    for (int idx = 0; idx < btns.length; idx++) {
-        final JButton b = btns[idx];
-        if (b == null) continue;
-        final Color base = colors[idx];
-
-
-        b.setBackground(base);
-        b.setForeground(Color.WHITE);
-        b.setFont(new Font("Segoe UI", Font.BOLD, 21));
-        b.setFocusPainted(false);
-        b.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        b.setOpaque(true);
-        b.setBorder(BorderFactory.createCompoundBorder(
-            BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true),
-            BorderFactory.createEmptyBorder(12, 20, 12, 20)
-        ));
-
-  
-        b.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                b.setBackground(base.brighter());
-                b.setForeground(new Color(30, 30, 30));
-                b.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1, true));
             }
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+
+            JButton[] btns = new JButton[]{
+                (btnAddStudent == null ? null : btnAddStudent),
+                (btnViewStudents == null ? null : btnViewStudents),
+                (btnUpdateStudent == null ? null : btnUpdateStudent),
+                (btnDeleteStudent == null ? null : btnDeleteStudent)
+            };
+
+            // Gradient-inspired modern colors 
+            //codes for colors 
+            Color[] colors = new Color[]{
+                new Color(255, 99, 132), // coral pink 
+                new Color(0, 181, 204), // bright cyan
+                new Color(155, 89, 182), // violet purple
+                new Color(255, 159, 67) // orange
+            };
+
+            for (int idx = 0; idx < btns.length; idx++) {
+                final JButton b = btns[idx];
+                if (b == null) {
+                    continue;
+                }
+                final Color base = colors[idx];
+
                 b.setBackground(base);
                 b.setForeground(Color.WHITE);
-                b.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true));
+                b.setFont(new Font("Segoe UI", Font.BOLD, 21));
+                b.setFocusPainted(false);
+                b.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                b.setOpaque(true);
+                b.setBorder(BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true),
+                        BorderFactory.createEmptyBorder(12, 20, 12, 20)
+                ));
+
+                b.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseEntered(java.awt.event.MouseEvent evt) {
+                        b.setBackground(base.brighter());
+                        b.setForeground(new Color(30, 30, 30));
+                        b.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 60), 1, true));
+                    }
+
+                    @Override
+                    public void mouseExited(java.awt.event.MouseEvent evt) {
+                        b.setBackground(base);
+                        b.setForeground(Color.WHITE);
+                        b.setBorder(BorderFactory.createLineBorder(new Color(70, 70, 80), 1, true));
+                    }
+                });
             }
-        });
-    }
 
-
-    if (btnLogout != null) {
-        btnLogout.setBackground(new Color(80, 20, 20));
-        btnLogout.setForeground(new Color(255, 85, 85));
-        btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        btnLogout.setFocusPainted(false);
-        btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnLogout.setOpaque(true);
-        btnLogout.setBorder(BorderFactory.createLineBorder(new Color(90, 40, 40), 1));
-
-        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnLogout.setBackground(new Color(200, 50, 50));
-                btnLogout.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseExited(java.awt.event.MouseEvent evt) {
+            if (btnLogout != null) {
                 btnLogout.setBackground(new Color(80, 20, 20));
                 btnLogout.setForeground(new Color(255, 85, 85));
+                btnLogout.setFont(new Font("Segoe UI", Font.BOLD, 24));
+                btnLogout.setFocusPainted(false);
+                btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                btnLogout.setOpaque(true);
+                btnLogout.setBorder(BorderFactory.createLineBorder(new Color(90, 40, 40), 1));
+
+                btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+                    @Override
+                    public void mouseEntered(java.awt.event.MouseEvent evt) {
+                        btnLogout.setBackground(new Color(200, 50, 50));
+                        btnLogout.setForeground(Color.WHITE);
+                    }
+
+                    @Override
+                    public void mouseExited(java.awt.event.MouseEvent evt) {
+                        btnLogout.setBackground(new Color(80, 20, 20));
+                        btnLogout.setForeground(new Color(255, 85, 85));
+                    }
+                });
             }
-        });
-    }
 
+            UIManager.put("ToolTip.background", panelColor);
+            UIManager.put("ToolTip.foreground", textColor);
+            UIManager.put("ToolTip.font", new Font("Segoe UI", Font.PLAIN, 15));
 
-    UIManager.put("ToolTip.background", panelColor);
-    UIManager.put("ToolTip.foreground", textColor);
-    UIManager.put("ToolTip.font", new Font("Segoe UI", Font.PLAIN, 15));
-
-} catch (Exception ex) {
-}
+        } catch (Exception ex) {
+        }
 
 //            setBackground(Color.WHITE);
 //        setLayout(new java.awt.BorderLayout());
@@ -181,9 +172,19 @@ try {
 
         btnViewStudents.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnViewStudents.setText("View Students");
+        btnViewStudents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewStudentsActionPerformed(evt);
+            }
+        });
 
         btnUpdateStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnUpdateStudent.setText("Update Student");
+        btnUpdateStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStudentActionPerformed(evt);
+            }
+        });
 
         btnDeleteStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDeleteStudent.setText("Delete Student");
@@ -254,19 +255,31 @@ try {
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-    int choice = javax.swing.JOptionPane.showConfirmDialog(
-        this,
-        "Are you sure you want to logout?",
-        "Confirm Logout",
-        javax.swing.JOptionPane.YES_NO_OPTION
-    );
+        int choice = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to logout?",
+                "Confirm Logout",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
 
-    if (choice == javax.swing.JOptionPane.YES_OPTION) {
-        parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "login");
-    }
+        if (choice == javax.swing.JOptionPane.YES_OPTION) {
+            parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "login");
+        }
 
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnViewStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentsActionPerformed
+        // TODO add your handling code here:
+        parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "viewStudents");
+
+    }//GEN-LAST:event_btnViewStudentsActionPerformed
+
+    private void btnUpdateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStudentActionPerformed
+        // TODO add your handling code here:
+        parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "searchAndUpdate");
+
+    }//GEN-LAST:event_btnUpdateStudentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

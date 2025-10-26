@@ -4,16 +4,17 @@
  */
 package com.mycompany.studentmanagementsystem.nour;
 
+import com.mycompany.studentmanagementsystem.SearchAndUpdate;
+import com.mycompany.studentmanagementsystem.ViewStudents;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Font;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -25,20 +26,22 @@ public class MainFrame extends javax.swing.JFrame {
     private JPanel mainPanel;
     private LoginPanel loginPanel;
     private Mainpanel homePanel;
+    private ViewStudents viewStudentsPanel;
+    private SearchAndUpdate searchAndUpdatePanel;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
      * Creates new form MainFrame
+     *
+     * @throws java.io.FileNotFoundException
      */
-    public MainFrame() {
+    public MainFrame() throws FileNotFoundException {
         initComponents();
-        setSize(950, 500);
         setTitle("🎓 Student Management System");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-        setResizable(false);
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(240, 242, 245));
 
@@ -47,14 +50,17 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.setBackground(new Color(250, 250, 250));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-       
         loginPanel = new LoginPanel();
         mainPanel.add(loginPanel, "login");
-
 
         homePanel = new Mainpanel(this);
         mainPanel.add(homePanel, "home");
 
+        viewStudentsPanel = new ViewStudents(this);
+        mainPanel.add(viewStudentsPanel, "viewStudents");
+
+        searchAndUpdatePanel = new SearchAndUpdate(this);
+        mainPanel.add(searchAndUpdatePanel, "searchAndUpdate");
 
         loginPanel.getLoginButton().addActionListener(e -> {
             String username = loginPanel.getUsername();
@@ -125,7 +131,13 @@ public class MainFrame extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new MainFrame().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> {
+            try {
+                new MainFrame().setVisible(true);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
 
     }
 
@@ -136,6 +148,28 @@ public class MainFrame extends javax.swing.JFrame {
     public JPanel getMainPanel() {
         return mainPanel;
     }
+    
+        /**
+     * @return the homePanel
+     */
+    public Mainpanel getHomePanel() {
+        return homePanel;
+    }
+
+    /**
+     * @return the viewStudentsPanel
+     */
+    public ViewStudents getViewStudentsPanel() {
+        return viewStudentsPanel;
+    }
+
+    /**
+     * @return the searchAndUpdatePanel
+     */
+    public SearchAndUpdate getSearchAndUpdatePanel() {
+        return searchAndUpdatePanel;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
