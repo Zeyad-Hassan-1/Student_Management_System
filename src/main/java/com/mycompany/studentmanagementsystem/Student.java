@@ -4,6 +4,8 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import com.mycompany.studentmanagementsystem.inputverifiers.Validation;
+
 /**
  *
  * @author Hazem
@@ -14,6 +16,10 @@ public class Student {
      * @param fullName the fullName to set
      */
     public void setFullName(String fullName) {
+        if(Validation.isEmpty(fullName))
+        {
+            throw new IllegalArgumentException("Invalid Name field");
+        }
         this.fullName = fullName;
     }
 
@@ -21,6 +27,10 @@ public class Student {
      * @param gender the gender to set
      */
     public void setGender(String gender) {
+        if(Validation.isEmpty(gender))
+        {
+            throw new IllegalArgumentException("Invalid Gender field");
+        }
         this.gender = gender;
     }
 
@@ -30,46 +40,31 @@ public class Student {
     private String gender;
     private String department;
     private double GPA = 0.00;
-
-    private void validateDepartment(String department) throws IllegalArgumentException
-    {
-        if(department == null || department.trim().equals(""))
-        {
-            throw new IllegalArgumentException("Invalid Department field");
-        }
-    }
-    
-    private void validateGPA(double GPA) throws IllegalArgumentException
-    {
-       if (GPA < 0.00f) {
-            throw new IllegalArgumentException("Invalid GPA: Please enter non-negative decimal number");
-        } 
-    }
-    
-    private void validateAge(int age) throws IllegalArgumentException
-    {
-        if (age <= 0) {
-            throw new IllegalArgumentException("Invalid Age: Please enter positive integer");
-        }
-    }
     
     private void validateArguments(int studentId, String fullName, int age, String gender, String department, double GPA) throws IllegalArgumentException
     {
-        if(fullName == null || fullName.trim().equals(""))
+        if (!Validation.isGPA(GPA)) {
+            throw new IllegalArgumentException("Invalid GPA: Please enter non-negative decimal number");
+        } 
+        if(Validation.isEmpty(fullName))
         {
             throw new IllegalArgumentException("Invalid Name field");
         }
-        if (studentId <= 0) {
+        if(Validation.isEmpty(department))
+        {
+            throw new IllegalArgumentException("Invalid Department field");
+        }
+        if(Validation.isEmpty(gender)||(!(gender.equals("male") || gender.equals("female"))))
+        {
+            throw new IllegalArgumentException("Invalid Gender field");
+        }
+        if (!Validation.isPositiveInt(studentId)) {
             throw new IllegalArgumentException("Invalid Student Id: Please enter positive integer");
         }
-        
-        if (gender== null||gender.trim().toLowerCase().equals("")||(!(gender.equals("male") || gender.equals("female")))) {
-            throw new IllegalArgumentException("Invalid Gender: Please enter either \"male\" or \"female\"");
+        if(!Validation.isAge(age))
+        {
+            throw new IllegalArgumentException("Invalid Age: Please enter positive integer");
         }
-        validateAge(age);
-        validateGPA(GPA);
-        validateDepartment(department);
-        
     }
     
     /**
@@ -86,7 +81,7 @@ public class Student {
         
         validateArguments(studentId, fullName, age, gender, department, GPA);
         this.fullName = fullName.trim();
-        this.department = department.trim();
+        this.department = department.trim().toUpperCase();
         this.studentId = studentId;
         this.age = age;
         this.gender = gender.trim().toLowerCase();
@@ -118,7 +113,10 @@ public class Student {
      * @param age the age to set
      */
     public void setAge(int age) throws IllegalArgumentException {
-        validateAge(age);
+        if(!Validation.isAge(age))
+        {
+            throw new IllegalArgumentException("Invalid Age: Please enter positive integer");
+        }
         this.age = age;
     }
 
@@ -140,8 +138,11 @@ public class Student {
      * @param department the department to set
      */
     public void setDepartment(String department) {
-        validateDepartment(department);
-        this.department = department.trim();
+        if(Validation.isEmpty(department))
+        {
+            throw new IllegalArgumentException("Invalid Department field");
+        }
+        this.department = department.trim().toUpperCase();
     }
 
     /**
@@ -155,7 +156,9 @@ public class Student {
      * @param GPA the GPA to set
      */
     public void setGPA(double GPA) throws IllegalArgumentException {
-        validateGPA(GPA);
+        if (!Validation.isGPA(GPA)) {
+            throw new IllegalArgumentException("Invalid GPA: Please enter non-negative decimal number");
+        }
         this.GPA = GPA;
     }
 

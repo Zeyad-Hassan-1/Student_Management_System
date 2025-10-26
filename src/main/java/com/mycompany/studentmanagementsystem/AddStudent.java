@@ -323,7 +323,7 @@ public class AddStudent extends javax.swing.JPanel {
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
-    public void showHome() {
+    public final void showHome() {
         mainFrame.getCardLayout().show(mainFrame.getMainPanel(), "home");
     }
 }

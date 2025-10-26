@@ -13,9 +13,9 @@ import javax.swing.JTextField;
  *
  * @author HP
  */
-public class NotEmptyValidation extends InputVerifier{
+public class IsEmptyVerifier extends InputVerifier{
     private String fieldName;
-    public NotEmptyValidation(String fieldName)
+    public IsEmptyVerifier(String fieldName)
     {
         this.fieldName=fieldName;
     }
@@ -23,7 +23,7 @@ public class NotEmptyValidation extends InputVerifier{
     public boolean verify(JComponent input)
     {
         JTextField field=(JTextField) input;
-        if(field.getText().trim().isEmpty())
+        if(Validation.isEmpty(field.getText()))
         {
             JOptionPane.showMessageDialog(input, fieldName+"cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
