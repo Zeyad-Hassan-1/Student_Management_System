@@ -38,7 +38,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
-     
+      
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(240, 242, 245));
 
