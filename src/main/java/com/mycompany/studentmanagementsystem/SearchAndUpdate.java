@@ -413,7 +413,7 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         model.setValueAt(age, modelRow,2);
         model.setValueAt(gender, modelRow,3);
         model.setValueAt(department, modelRow,4);
-        model.setValueAt(gpa, modelRow,4);
+        model.setValueAt(gpa, modelRow,5);
         
         studentDatabase.editStudentById(id, fullName, age, gender, department, gpa);
         studentDatabase.saveToFile();
