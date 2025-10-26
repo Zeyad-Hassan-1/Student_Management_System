@@ -51,31 +51,13 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="2">
-                <Column editable="false" title="ID" type="java.lang.Integer">
-                  <Data value="100"/>
-                  <Data value="101"/>
-                </Column>
-                <Column editable="false" title="Full Name" type="java.lang.String">
-                  <Data value="Zeyad Hassan"/>
-                  <Data value="Mohamed Hassan"/>
-                </Column>
-                <Column editable="false" title="Age" type="java.lang.Integer">
-                  <Data value="20"/>
-                  <Data value="23"/>
-                </Column>
-                <Column editable="false" title="Gender" type="java.lang.String">
-                  <Data value="Male"/>
-                  <Data value="Male"/>
-                </Column>
-                <Column editable="false" title="Department" type="java.lang.String">
-                  <Data value="CCE"/>
-                  <Data value="CSE"/>
-                </Column>
-                <Column editable="false" title="GPA" type="java.lang.Float">
-                  <Data value="3.7"/>
-                  <Data value="3.9"/>
-                </Column>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="ID" type="java.lang.Integer"/>
+                <Column editable="false" title="Full Name" type="java.lang.String"/>
+                <Column editable="false" title="Age" type="java.lang.Integer"/>
+                <Column editable="false" title="Gender" type="java.lang.String"/>
+                <Column editable="false" title="Department" type="java.lang.String"/>
+                <Column editable="false" title="GPA" type="java.lang.Float"/>
               </Table>
             </Property>
             <Property name="autoscrolls" type="boolean" value="false"/>
@@ -113,7 +95,6 @@
                 </Column>
               </TableColumnModel>
             </Property>
-            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Hand Cursor"/>
             </Property>

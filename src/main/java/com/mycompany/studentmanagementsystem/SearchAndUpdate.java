@@ -6,7 +6,6 @@ package com.mycompany.studentmanagementsystem;
 
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import java.awt.Color;
-import java.awt.List;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,7 +27,7 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
     private final Color originalSelectionColor;
     private boolean isHighlighted = false;
     private int editingModelRow = -1;
-    private StudentDatabase studentDatabase;
+    private final StudentDatabase studentDatabase;
     DefaultTableModel model;
 
 

@@ -4,8 +4,12 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import com.mycompany.studentmanagementsystem.database.StudentDatabase;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -13,35 +17,42 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Mega
  */
-public class ViewStudents extends javax.swing.JPanel {
+public final class ViewStudents extends javax.swing.JPanel {
+
+    private final StudentDatabase studentDatabase;
+    DefaultTableModel model;
 
     /**
      * Creates new form ViewStudents
+     * @throws java.io.FileNotFoundException
      */
-    public ViewStudents() {
+    public ViewStudents() throws FileNotFoundException {
         initComponents();
+        studentDatabase = new StudentDatabase("students.txt");
+        studentDatabase.readFromFile();
+        this.model = (DefaultTableModel)students.getModel();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 
+        loadStudentsIntoTable(studentDatabase.returnAllStudents());
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
         // Apply to all columns
         for (int i = 0; i < students.getColumnCount(); i++) {
             students.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
         }
-        
-    // 1. Create a custom sorter
-    TableRowSorter<TableModel> sorter = new TableRowSorter<>(students.getModel());
 
-    // 2. Configure it
-    sorter.setSortable(0, true);   // ID
-    sorter.setSortable(1, true);   // Name
-    sorter.setSortable(2, false);  // Age
-    sorter.setSortable(3, false);  // Gender
-    sorter.setSortable(4, false);  // Department
-    sorter.setSortable(5, true);  // GPA
-    students.setRowSorter(sorter);
+        // 1. Create a custom sorter
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(students.getModel());
+
+        // 2. Configure it
+        sorter.setSortable(0, true);   // ID
+        sorter.setSortable(1, true);   // Name
+        sorter.setSortable(2, false);  // Age
+        sorter.setSortable(3, false);  // Gender
+        sorter.setSortable(4, false);  // Department
+        sorter.setSortable(5, true);  // GPA
+        students.setRowSorter(sorter);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,8 +86,7 @@ public class ViewStudents extends javax.swing.JPanel {
         students.setForeground(new java.awt.Color(255, 255, 255));
         students.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(100), "Zeyad Hassan",  new Integer(20), "Male", "CCE",  new Float(3.7)},
-                { new Integer(101), "Mohamed Hassan",  new Integer(23), "Male", "CSE",  new Float(3.9)}
+
             },
             new String [] {
                 "ID", "Full Name", "Age", "Gender", "Department", "GPA"
@@ -98,12 +108,10 @@ public class ViewStudents extends javax.swing.JPanel {
             }
         });
         students.setAutoscrolls(false);
-        students.setColumnSelectionAllowed(true);
         students.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         students.setRowHeight(40);
         students.setSelectionBackground(new java.awt.Color(30, 30, 30));
         students.setShowGrid(true);
-        students.setShowHorizontalLines(true);
         students.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(students);
         students.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -166,7 +174,25 @@ public class ViewStudents extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void loadStudentsIntoTable(ArrayList<Student> studentList) {
+        // 1. Get the table model
 
+        // 2. Clear existing rows
+        model.setRowCount(0);
+
+        // 3. Add each student as a row
+        for (Student s : studentList) {
+            Object[] row = {
+                s.getStudentId(),
+                s.getFullName(),
+                s.getAge(),
+                s.getGender(),
+                s.getDepartment(),
+                s.getGPA()
+            };
+            model.addRow(row);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

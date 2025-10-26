@@ -22,7 +22,7 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.BorderLayout());
 
         // Add your panel to the center
-        getContentPane().add(new SearchAndUpdate(), java.awt.BorderLayout.CENTER);
+        getContentPane().add(new ViewStudents(), java.awt.BorderLayout.CENTER);
     }
 
     /**
