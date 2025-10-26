@@ -67,7 +67,29 @@ public class MainFrame extends javax.swing.JFrame {
             String password = loginPanel.getPassword();
 
             if (username.equals("admin") && password.equals("1234")) {
+                try {
+                    java.io.File file = new java.io.File("student.txt");
+
+                    if (file.createNewFile()) {
+                        System.out.println(" File created: " + file.getAbsolutePath());
+                    } else {
+                        System.out.println("️ File already exists: " + file.getAbsolutePath());
+                    }
+
+                  
+                    
+
+                } catch (Exception ex) {
+                    javax.swing.JOptionPane.showMessageDialog(
+                            this,
+                            "Error creating file: " + ex.getMessage(),
+                            "File Error",
+                            javax.swing.JOptionPane.ERROR_MESSAGE
+                    );
+                }
+
                 cardLayout.show(mainPanel, "home");
+
             } else {
                 javax.swing.JOptionPane.showMessageDialog(
                         this,
@@ -76,8 +98,7 @@ public class MainFrame extends javax.swing.JFrame {
                         javax.swing.JOptionPane.ERROR_MESSAGE
                 );
             }
-        }
-        );
+        });
 
         add(mainPanel, BorderLayout.CENTER);
         cardLayout.show(mainPanel, "login");
@@ -94,17 +115,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 430, Short.MAX_VALUE)
-        );
+        setPreferredSize(new java.awt.Dimension(900, 700));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
