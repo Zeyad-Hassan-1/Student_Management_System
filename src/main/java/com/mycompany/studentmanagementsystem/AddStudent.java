@@ -16,6 +16,7 @@ public class AddStudent extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
     private StudentDatabase database;
+    private boolean automateId = false;
     /**
      * Creates new form AddStudent
      */
@@ -24,6 +25,7 @@ public class AddStudent extends javax.swing.JPanel {
         initComponents();
         database = new StudentDatabase("students.txt");
         database.readFromFile();
+        btnMale.setSelected(true);
     }
 
     /**
@@ -35,61 +37,281 @@ public class AddStudent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        genderBtn = new javax.swing.ButtonGroup();
+        showHome = new javax.swing.JButton();
         Title = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        fullName = new javax.swing.JLabel();
+        studentId = new javax.swing.JLabel();
+        age = new javax.swing.JLabel();
+        gender = new javax.swing.JLabel();
+        gpa = new javax.swing.JLabel();
+        depratment = new javax.swing.JLabel();
+        fieldFullName = new javax.swing.JTextField();
+        btnAutomateId = new javax.swing.JRadioButton();
+        fieldStudentId = new javax.swing.JTextField();
+        btnMale = new javax.swing.JRadioButton();
+        btnFemale = new javax.swing.JRadioButton();
+        updateButton = new javax.swing.JButton();
+        fieldDepartment = new javax.swing.JTextField();
+        spinnerAge = new javax.swing.JSpinner();
+        spinnerGPA = new javax.swing.JSpinner();
 
-        jButton1.setBackground(new java.awt.Color(49, 51, 53));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText(" ← Back ");
-        jButton1.setBorder(null);
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jButton1.setOpaque(true);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        setPreferredSize(new java.awt.Dimension(0, 0));
+        setLayout(null);
+
+        showHome.setBackground(new java.awt.Color(49, 51, 53));
+        showHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        showHome.setText(" ← Back ");
+        showHome.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        showHome.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        showHome.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        showHome.setOpaque(true);
+        showHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                showHomeActionPerformed(evt);
             }
         });
+        add(showHome);
+        showHome.setBounds(0, 0, 80, 80);
 
         Title.setBackground(new java.awt.Color(49, 51, 53));
         Title.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Title.setText("Add Student");
         Title.setToolTipText("");
+        Title.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         Title.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Title.setMaximumSize(new java.awt.Dimension(67, 25));
         Title.setMinimumSize(new java.awt.Dimension(67, 25));
+        Title.setOpaque(true);
         Title.setPreferredSize(new java.awt.Dimension(67, 25));
+        add(Title);
+        Title.setBounds(72, 0, 620, 80);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel1.setBackground(new java.awt.Color(49, 51, 53));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        fullName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        fullName.setText("Full Name");
+
+        studentId.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        studentId.setText("ID");
+
+        age.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        age.setText("Age");
+
+        gender.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        gender.setText("Gender");
+
+        gpa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        gpa.setText("GPA");
+
+        depratment.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        depratment.setText("Department");
+
+        fieldFullName.setBackground(new java.awt.Color(255, 255, 255));
+        fieldFullName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fieldFullName.setForeground(new java.awt.Color(0, 0, 0));
+        fieldFullName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        fieldFullName.setNextFocusableComponent(fieldStudentId);
+        fieldFullName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldFullNameActionPerformed(evt);
+            }
+        });
+
+        btnAutomateId.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAutomateId.setText("Automate ID");
+        btnAutomateId.setNextFocusableComponent(btnMale);
+
+        fieldStudentId.setBackground(new java.awt.Color(255, 255, 255));
+        fieldStudentId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fieldStudentId.setForeground(new java.awt.Color(0, 0, 0));
+        fieldStudentId.setNextFocusableComponent(btnMale);
+        fieldStudentId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldStudentIdActionPerformed(evt);
+            }
+        });
+
+        genderBtn.add(btnMale);
+        btnMale.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnMale.setText("Male");
+        btnMale.setNextFocusableComponent(spinnerAge);
+        btnMale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaleActionPerformed(evt);
+            }
+        });
+
+        genderBtn.add(btnFemale);
+        btnFemale.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnFemale.setText("Female");
+        btnFemale.setNextFocusableComponent(spinnerAge);
+        btnFemale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFemaleActionPerformed(evt);
+            }
+        });
+
+        updateButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        updateButton.setText("Add");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        fieldDepartment.setBackground(new java.awt.Color(255, 255, 255));
+        fieldDepartment.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        fieldDepartment.setForeground(new java.awt.Color(0, 0, 0));
+        fieldDepartment.setNextFocusableComponent(spinnerGPA);
+        fieldDepartment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fieldDepartmentActionPerformed(evt);
+            }
+        });
+
+        spinnerAge.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        spinnerAge.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        spinnerAge.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        spinnerAge.setNextFocusableComponent(fieldDepartment);
+
+        spinnerGPA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        spinnerGPA.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 4.0d, 0.01d));
+        spinnerGPA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(depratment, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(age, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(studentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Title, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fieldFullName)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(fieldStudentId)
+                                .addGap(48, 48, 48))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnMale)
+                                .addGap(173, 173, 173)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFemale)
+                            .addComponent(btnAutomateId)))
+                    .addComponent(fieldDepartment)
+                    .addComponent(spinnerAge)
+                    .addComponent(spinnerGPA))
+                .addGap(36, 36, 36))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 461, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(studentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAutomateId)
+                            .addComponent(fieldStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMale)
+                    .addComponent(btnFemale))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(age, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spinnerAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(depratment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(fieldDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(gpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spinnerGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(29, 29, 29)
+                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
+
+        add(jPanel1);
+        jPanel1.setBounds(0, 90, 690, 460);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void showHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHomeActionPerformed
         // TODO add your handling code here:
         showHome();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_showHomeActionPerformed
+
+    private void fieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldFullNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldFullNameActionPerformed
+
+    private void fieldStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldStudentIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldStudentIdActionPerformed
+
+    private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnMaleActionPerformed
+
+    private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFemaleActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void fieldDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDepartmentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldDepartmentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel age;
+    private javax.swing.JRadioButton btnAutomateId;
+    private javax.swing.JRadioButton btnFemale;
+    private javax.swing.JRadioButton btnMale;
+    private javax.swing.JLabel depratment;
+    private javax.swing.JTextField fieldDepartment;
+    private javax.swing.JTextField fieldFullName;
+    private javax.swing.JTextField fieldStudentId;
+    private javax.swing.JLabel fullName;
+    private javax.swing.JLabel gender;
+    private javax.swing.ButtonGroup genderBtn;
+    private javax.swing.JLabel gpa;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton showHome;
+    private javax.swing.JSpinner spinnerAge;
+    private javax.swing.JSpinner spinnerGPA;
+    private javax.swing.JLabel studentId;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
     public void showHome() {
