@@ -255,6 +255,7 @@ public class Mainpanel extends javax.swing.JPanel {
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
         // TODO add your handling code here:
+        parentFrame.getCardLayout().show(parentFrame.getAddStudentPanel(),"addStudent");
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

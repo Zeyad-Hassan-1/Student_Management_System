@@ -75,7 +75,6 @@ public final class ViewStudents extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(30, 30, 30));
         java.awt.GridBagLayout layout = new java.awt.GridBagLayout();
         layout.columnWidths = new int[] {10, 200, 10};
         layout.rowHeights = new int[] {80, 10, 100, 10};
