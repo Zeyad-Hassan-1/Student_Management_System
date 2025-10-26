@@ -1,0 +1,10 @@
+9778,Zeyad Hassan,20,male,CCE,3.7
+9779,Mohamed Ali,22,male,CSE,3.85
+9780,Radwa Ahmed,21,female,EEC,3.92
+9781,Layla Mahmoud,23,female,MEC,3.65
+9782,Omar Fathy,19,male,CCE,3.5
+9783,Ahmed Samir,24,male,MEC,3.78
+9784,Nourhan Said,20,female,CSE,3.95
+9785,Karim Hossam,22,male,EEC,3.4
+9786,Sara Tarek,21,female,CCE,3.88
+9787,Youssef Nabil,23,male,CSE,3.6
