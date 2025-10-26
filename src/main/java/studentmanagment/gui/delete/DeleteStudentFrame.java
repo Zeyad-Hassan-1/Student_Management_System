@@ -4,11 +4,13 @@
  */
 package studentmanagment.gui.delete;
 
+import com.mycompany.studentmanagementsystem.Student;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import com.mycompany.studentmanagementsystem.StudentManagementSystem;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  *
@@ -63,13 +65,13 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
 
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Full Name", "Age", "Gender", "Department"
             }
         ));
         jScrollPane2.setViewportView(studentsTable);
@@ -87,12 +89,12 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 124, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(deleteButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 33, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,11 +152,27 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
         }
     }
         
+    
         
             
         
     }//GEN-LAST:event_deleteButtonActionPerformed
-    
+    private void loadStudents() {
+        DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();
+        model.setRowCount(0); 
+
+        List<Student> students = manager.returnAllStudents();
+        for (Student s : students) {
+            model.addRow(new Object[]{
+                s.getStudentId(),
+                s.getFullName(),
+                s.getAge(),
+                s.getGender(),
+                s.getDepartment(),
+                s.getGPA()
+            });
+        }
+    }
     /**
      * @param args the command line arguments
      */
