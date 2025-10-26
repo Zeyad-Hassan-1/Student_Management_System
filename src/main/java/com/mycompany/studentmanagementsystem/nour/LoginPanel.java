@@ -48,7 +48,7 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordField.setCaretColor(new java.awt.Color(255, 200, 0));
         passwordField.setBorder(javax.swing.BorderFactory.createCompoundBorder(
                 javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 255), 2, true),
-                javax.swing.BorderFactory.createEmptyBorder(8, 12, 8, 12)
+                javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 10)
         ));
 
         loginButton.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 26));
