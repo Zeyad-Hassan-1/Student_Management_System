@@ -4,11 +4,18 @@
  */
 package com.mycompany.studentmanagementsystem;
 
+import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import java.awt.Color;
+import java.awt.List;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -16,20 +23,25 @@ import javax.swing.table.TableRowSorter;
  *
  * @author Mega
  */
-public class SearchAndUpdate extends javax.swing.JPanel {
+public final class SearchAndUpdate extends javax.swing.JPanel {
 
     private final Color originalSelectionColor;
     private boolean isHighlighted = false;
     private int editingModelRow = -1;
-    TableModel model;
+    private StudentDatabase studentDatabase;
+    DefaultTableModel model;
 
 
     /**
      * Creates new form SearchAndUpdate
+     * @throws java.io.FileNotFoundException
      */
-    public SearchAndUpdate() {
+    public SearchAndUpdate() throws FileNotFoundException{
         initComponents();
-        this.model = students.getModel();
+        studentDatabase = new StudentDatabase("students.txt");
+        studentDatabase.readFromFile();
+        this.model = (DefaultTableModel)students.getModel();
+        loadStudentsIntoTable(studentDatabase.returnAllStudents());
         originalSelectionColor = students.getSelectionBackground();
         ImageIcon searchIcon = new ImageIcon(
                 getClass().getResource("/search.png") // ← note the leading "/"
@@ -62,7 +74,6 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         sorter.setSortable(3, false);  // Gender
         sorter.setSortable(4, false);  // Department
         sorter.setSortable(5, true);  // GPA
-        sorter.setSortable(6, false);  // update
         students.setRowSorter(sorter);
 
         this.updateForm.setVisible(false);
@@ -130,47 +141,46 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         students.setForeground(new java.awt.Color(255, 255, 255));
         students.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(100), "Zeyad Hassan",  new Integer(20), "Male", "CCE",  new Float(3.7), "update"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                { new Integer(101), "Mohamed Hassan",  new Integer(23), "Male", "CSE",  new Float(3.9), "update"}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                { new Integer(101), "Mohamed Hassan",  new Integer(23), "Male", "CSE", null}
             },
             new String [] {
-                "ID", "Full Name", "Age", "Gender", "Department", "GPA", "Update"
+                "ID", "Full Name", "Age", "Gender", "Department", "GPA"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -349,7 +359,7 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         Integer age = (Integer) model.getValueAt(modelRow, 2);
         String gender = model.getValueAt(modelRow, 3).toString();
         String department = model.getValueAt(modelRow, 4).toString();
-        Float gpa = (Float) model.getValueAt(modelRow, 5);
+        Double gpa = (Double) model.getValueAt(modelRow, 5);
         
         loadUpdateForm(id, fullName, age, gender, department, gpa);
         editingModelRow = modelRow ;
@@ -366,12 +376,17 @@ public class SearchAndUpdate extends javax.swing.JPanel {
 
     }//GEN-LAST:event_searchActionPerformed
 
+    
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        // TODO add your handling code here:
-        update(editingModelRow);
+        try {
+            // TODO add your handling code here:
+            update(editingModelRow);
+        } catch (Exception ex) {
+            Logger.getLogger(SearchAndUpdate.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void loadUpdateForm(int id, String fullName, int age, String gender, String department, float gpa) {
+    private void loadUpdateForm(int id, String fullName, int age, String gender, String department, double gpa) {
         // 1. Fill the form fields
         this.id.setText(String.valueOf(id));
         this.fullName.setText(fullName);
@@ -386,13 +401,13 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         repaint();
     }
     
-    private void update(int modelRow){
+    private void update(int modelRow) throws Exception{
         int id = Integer.parseInt(this.id.getText());
         String fullName = this.fullName.getText();
         int age = Integer.parseInt(this.age.getText());
         String gender = this.gender.getSelectedItem().toString();
         String department = this.department.getText();
-        float gpa = Float.parseFloat(this.gpa.getText());
+        double gpa = Double.parseDouble(this.gpa.getText());
         
         model.setValueAt(id, modelRow,0);
         model.setValueAt(fullName, modelRow,1);
@@ -401,7 +416,8 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         model.setValueAt(department, modelRow,4);
         model.setValueAt(gpa, modelRow,4);
         
-        //call update database function
+        studentDatabase.editStudentById(id, fullName, age, gender, department, gpa);
+        studentDatabase.saveToFile();
     }
     
     private void searchAndHighlight(String term) {
@@ -435,7 +451,26 @@ public class SearchAndUpdate extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Not found");
     }
 
-
+    public void loadStudentsIntoTable(ArrayList<Student> studentList) {
+    // 1. Get the table model
+    
+    // 2. Clear existing rows
+    model.setRowCount(0);
+    
+    // 3. Add each student as a row
+    for (Student s : studentList) {
+        Object[] row = {
+            s.getStudentId(),
+            s.getFullName(),
+            s.getAge(),
+            s.getGender(),
+            s.getDepartment(),
+            s.getGPA()
+        };
+        model.addRow(row);
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
     private javax.swing.JTextField department;

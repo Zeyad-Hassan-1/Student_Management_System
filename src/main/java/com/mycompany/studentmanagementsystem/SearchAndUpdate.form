@@ -69,9 +69,8 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="7" rowCount="31">
+              <Table columnCount="6" rowCount="30">
                 <Column editable="false" title="ID" type="java.lang.Integer">
-                  <Data value="100"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -104,7 +103,6 @@
                   <Data value="101"/>
                 </Column>
                 <Column editable="false" title="Full Name" type="java.lang.String">
-                  <Data value="Zeyad Hassan"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -137,7 +135,6 @@
                   <Data value="Mohamed Hassan"/>
                 </Column>
                 <Column editable="false" title="Age" type="java.lang.Integer">
-                  <Data value="20"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -170,7 +167,6 @@
                   <Data value="23"/>
                 </Column>
                 <Column editable="false" title="Gender" type="java.lang.String">
-                  <Data value="Male"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -203,7 +199,6 @@
                   <Data value="Male"/>
                 </Column>
                 <Column editable="false" title="Department" type="java.lang.String">
-                  <Data value="CCE"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -235,82 +230,12 @@
                   <Data value="null"/>
                   <Data value="CSE"/>
                 </Column>
-                <Column editable="false" title="GPA" type="java.lang.Float">
-                  <Data value="3.7"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="3.9"/>
-                </Column>
-                <Column editable="false" title="Update" type="java.lang.String">
-                  <Data value="update"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="null"/>
-                  <Data value="update"/>
-                </Column>
+                <Column editable="false" title="GPA" type="java.lang.Double"/>
               </Table>
             </Property>
             <Property name="autoscrolls" type="boolean" value="false"/>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="2">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                  <Title/>
-                  <Editor/>
-                  <Renderer/>
-                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>

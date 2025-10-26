@@ -239,7 +239,7 @@ public class StudentDatabase {
      * @param GPA
      * @throws IllegalArgumentException
      */
-    public void editStudentById(int studentId, int age, String department, double GPA) throws IllegalArgumentException {
+    public void editStudentById(int studentId,String fullName, int age,String gender ,String department, double GPA) throws IllegalArgumentException {
         Student target = searchStudent(studentId);
         if (target == null) {
             throw new IllegalArgumentException("Error: " + studentId + " Doesn't Exist!");
@@ -248,6 +248,8 @@ public class StudentDatabase {
         target.setAge(age);
         target.setDepartment(department);
         target.setGPA(GPA);
+        target.setFullName(fullName);
+        target.setGender(gender);
     }
 
     /**

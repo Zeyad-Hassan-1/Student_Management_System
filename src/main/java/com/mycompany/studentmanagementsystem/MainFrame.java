@@ -4,7 +4,7 @@
  */
 package com.mycompany.studentmanagementsystem;
 
-import com.formdev.flatlaf.FlatDarkLaf;
+import java.io.FileNotFoundException;
 
 /**
  *
@@ -14,8 +14,9 @@ public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
+     * @throws java.io.FileNotFoundException
      */
-    public MainFrame() {
+    public MainFrame() throws FileNotFoundException{
         initComponents();
         // Change layout to BorderLayout (overwrites GroupLayout)
         getContentPane().setLayout(new java.awt.BorderLayout());
