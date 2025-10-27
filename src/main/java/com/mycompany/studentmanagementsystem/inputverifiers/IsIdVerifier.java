@@ -24,7 +24,7 @@ public class IsIdVerifier extends InputVerifier{
             return false;
         }
         
-        if(Validation.isInt(field.getText()))
+        if(Validation.isPositiveInt(field.getText()))
         {
             JOptionPane.showMessageDialog(input,"Invalid Id format!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;

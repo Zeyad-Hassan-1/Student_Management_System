@@ -5,6 +5,8 @@
 package com.mycompany.studentmanagementsystem;
 
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
+import com.mycompany.studentmanagementsystem.inputverifiers.IsAlphabeticVerifier;
+import com.mycompany.studentmanagementsystem.inputverifiers.IsUniqueIdVerifier;
 import com.mycompany.studentmanagementsystem.nour.MainFrame;
 import java.io.FileNotFoundException;
 import javax.swing.JOptionPane;
@@ -17,9 +19,20 @@ public class AddStudent extends javax.swing.JPanel {
 
     private MainFrame mainFrame;
     private StudentDatabase database;
+    private String fullName;
+    private String studentId;
+    private int age = 1;
+    private double GPA = 0;
+    private String department;
+    private String gender = "male";
     private boolean automateId = false;
+    private IsAlphabeticVerifier nameVerifier = new IsAlphabeticVerifier("Name");
+    private IsAlphabeticVerifier departmentVerifier = new IsAlphabeticVerifier("Department");
+    private IsUniqueIdVerifier idVerifier;
     /**
      * Creates new form AddStudent
+     * @param mainFrame
+     * @throws java.io.FileNotFoundException
      */
     public AddStudent(MainFrame mainFrame) throws FileNotFoundException {
         this.mainFrame = mainFrame;
@@ -28,6 +41,7 @@ public class AddStudent extends javax.swing.JPanel {
         {
             database = new StudentDatabase("students.txt");
             database.readFromFile();
+            idVerifier = new IsUniqueIdVerifier(database);
         }
         catch(Exception e)
         {
@@ -35,6 +49,12 @@ public class AddStudent extends javax.swing.JPanel {
             showHome();
         }
         btnMale.setSelected(true);
+        fieldFullName.setInputVerifier(nameVerifier);
+        fieldDepartment.setInputVerifier(departmentVerifier);
+        fieldStudentId.setInputVerifier(idVerifier);
+        
+        showHome.setVerifyInputWhenFocusTarget(false); //very very important if you are willing to use inputVerifiers
+        
     }
 
     /**
@@ -45,29 +65,30 @@ public class AddStudent extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         genderBtn = new javax.swing.ButtonGroup();
         showHome = new javax.swing.JButton();
         Title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        fullName = new javax.swing.JLabel();
-        studentId = new javax.swing.JLabel();
-        age = new javax.swing.JLabel();
-        gender = new javax.swing.JLabel();
-        gpa = new javax.swing.JLabel();
-        depratment = new javax.swing.JLabel();
+        labelFullName = new javax.swing.JLabel();
+        labelStudentId = new javax.swing.JLabel();
+        labelAge = new javax.swing.JLabel();
+        labelGender = new javax.swing.JLabel();
+        labelGPA = new javax.swing.JLabel();
+        labelDepartment = new javax.swing.JLabel();
         fieldFullName = new javax.swing.JTextField();
         btnAutomateId = new javax.swing.JRadioButton();
         fieldStudentId = new javax.swing.JTextField();
         btnMale = new javax.swing.JRadioButton();
         btnFemale = new javax.swing.JRadioButton();
-        updateButton = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
         fieldDepartment = new javax.swing.JTextField();
         spinnerAge = new javax.swing.JSpinner();
         spinnerGPA = new javax.swing.JSpinner();
 
         setPreferredSize(new java.awt.Dimension(0, 0));
-        setLayout(null);
+        setLayout(new java.awt.GridBagLayout());
 
         showHome.setBackground(new java.awt.Color(49, 51, 53));
         showHome.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -81,8 +102,13 @@ public class AddStudent extends javax.swing.JPanel {
                 showHomeActionPerformed(evt);
             }
         });
-        add(showHome);
-        showHome.setBounds(0, 0, 80, 80);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 8;
+        gridBagConstraints.ipady = 51;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        add(showHome, gridBagConstraints);
 
         Title.setBackground(new java.awt.Color(49, 51, 53));
         Title.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -95,180 +121,264 @@ public class AddStudent extends javax.swing.JPanel {
         Title.setMinimumSize(new java.awt.Dimension(67, 25));
         Title.setOpaque(true);
         Title.setPreferredSize(new java.awt.Dimension(67, 25));
-        add(Title);
-        Title.setBounds(72, 0, 620, 80);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.ipadx = 553;
+        gridBagConstraints.ipady = 55;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 72, 0, 2);
+        add(Title, gridBagConstraints);
 
         jPanel1.setBackground(new java.awt.Color(49, 51, 53));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        fullName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        fullName.setText("Full Name");
+        labelFullName.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelFullName.setText("Full Name");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 60;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(22, 71, 0, 0);
+        jPanel1.add(labelFullName, gridBagConstraints);
 
-        studentId.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        studentId.setText("ID");
+        labelStudentId.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelStudentId.setText("ID");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 143;
+        gridBagConstraints.ipady = 5;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 71, 0, 0);
+        jPanel1.add(labelStudentId, gridBagConstraints);
 
-        age.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        age.setText("Age");
+        labelAge.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelAge.setText("Age");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.ipadx = 124;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 71, 0, 0);
+        jPanel1.add(labelAge, gridBagConstraints);
 
-        gender.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        gender.setText("Gender");
+        labelGender.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelGender.setText("Gender");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 88;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(26, 71, 0, 0);
+        jPanel1.add(labelGender, gridBagConstraints);
 
-        gpa.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        gpa.setText("GPA");
+        labelGPA.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelGPA.setText("GPA");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.ipadx = 120;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(38, 71, 0, 0);
+        jPanel1.add(labelGPA, gridBagConstraints);
 
-        depratment.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        depratment.setText("Department");
+        labelDepartment.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        labelDepartment.setText("Department");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.ipadx = 39;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(32, 71, 0, 0);
+        jPanel1.add(labelDepartment, gridBagConstraints);
 
         fieldFullName.setBackground(new java.awt.Color(255, 255, 255));
         fieldFullName.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         fieldFullName.setForeground(new java.awt.Color(0, 0, 0));
         fieldFullName.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        fieldFullName.setFocusTraversalPolicyProvider(true);
         fieldFullName.setNextFocusableComponent(fieldStudentId);
         fieldFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldFullNameActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 341;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 6, 0, 0);
+        jPanel1.add(fieldFullName, gridBagConstraints);
 
         btnAutomateId.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnAutomateId.setText("Automate ID");
+        btnAutomateId.setFocusTraversalPolicyProvider(true);
         btnAutomateId.setNextFocusableComponent(btnMale);
+        btnAutomateId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAutomateIdActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(24, 48, 0, 0);
+        jPanel1.add(btnAutomateId, gridBagConstraints);
 
         fieldStudentId.setBackground(new java.awt.Color(255, 255, 255));
         fieldStudentId.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         fieldStudentId.setForeground(new java.awt.Color(0, 0, 0));
+        fieldStudentId.setFocusTraversalPolicyProvider(true);
         fieldStudentId.setNextFocusableComponent(btnMale);
         fieldStudentId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldStudentIdActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 134;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(28, 6, 0, 0);
+        jPanel1.add(fieldStudentId, gridBagConstraints);
 
         genderBtn.add(btnMale);
         btnMale.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnMale.setText("Male");
+        btnMale.setFocusTraversalPolicyProvider(true);
         btnMale.setNextFocusableComponent(spinnerAge);
         btnMale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMaleActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(24, 6, 0, 0);
+        jPanel1.add(btnMale, gridBagConstraints);
 
         genderBtn.add(btnFemale);
         btnFemale.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnFemale.setText("Female");
+        btnFemale.setFocusTraversalPolicyProvider(true);
         btnFemale.setNextFocusableComponent(spinnerAge);
         btnFemale.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFemaleActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(24, 48, 0, 0);
+        jPanel1.add(btnFemale, gridBagConstraints);
 
-        updateButton.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        updateButton.setText("Add");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 11;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.ipadx = 593;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(29, 8, 5, 8);
+        jPanel1.add(btnAdd, gridBagConstraints);
 
         fieldDepartment.setBackground(new java.awt.Color(255, 255, 255));
         fieldDepartment.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         fieldDepartment.setForeground(new java.awt.Color(0, 0, 0));
+        fieldDepartment.setFocusTraversalPolicyProvider(true);
         fieldDepartment.setNextFocusableComponent(spinnerGPA);
         fieldDepartment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldDepartmentActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 341;
+        gridBagConstraints.ipady = -3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 6, 0, 0);
+        jPanel1.add(fieldDepartment, gridBagConstraints);
 
         spinnerAge.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         spinnerAge.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
         spinnerAge.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        spinnerAge.setFocusTraversalPolicyProvider(true);
         spinnerAge.setNextFocusableComponent(fieldDepartment);
+        spinnerAge.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerAgeStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 314;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(27, 6, 0, 0);
+        jPanel1.add(spinnerAge, gridBagConstraints);
 
         spinnerGPA.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         spinnerGPA.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, 4.0d, 0.01d));
         spinnerGPA.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        spinnerGPA.setFocusTraversalPolicyProvider(true);
+        spinnerGPA.setNextFocusableComponent(fieldFullName);
+        spinnerGPA.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spinnerGPAStateChanged(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 10;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.ipadx = 341;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(35, 6, 0, 0);
+        jPanel1.add(spinnerGPA, gridBagConstraints);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(69, 69, 69)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(depratment, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                    .addComponent(age, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(studentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(fieldFullName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(fieldStudentId)
-                                .addGap(48, 48, 48))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnMale)
-                                .addGap(173, 173, 173)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnFemale)
-                            .addComponent(btnAutomateId)))
-                    .addComponent(fieldDepartment)
-                    .addComponent(spinnerAge)
-                    .addComponent(spinnerGPA))
-                .addGap(36, 36, 36))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(updateButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(studentId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAutomateId)
-                            .addComponent(fieldStudentId, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(gender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMale)
-                    .addComponent(btnFemale))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(age, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(spinnerAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(depratment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(fieldDepartment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(gpa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(spinnerGPA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(29, 29, 29)
-                .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9))
-        );
-
-        add(jPanel1);
-        jPanel1.setBounds(0, 90, 690, 460);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = -4;
+        gridBagConstraints.ipady = -4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 4, 0);
+        add(jPanel1, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     private void showHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showHomeActionPerformed
@@ -276,51 +386,161 @@ public class AddStudent extends javax.swing.JPanel {
         showHome();
     }//GEN-LAST:event_showHomeActionPerformed
 
-    private void fieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldFullNameActionPerformed
+    private void fieldDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDepartmentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldFullNameActionPerformed
+        if(departmentVerifier.verify(fieldDepartment))
+        {
+            this.department = fieldDepartment.getText();
+            spinnerGPA.requestFocus();
+        }
+        else
+        {
+            fieldDepartment.requestFocus();
+        }
+    }//GEN-LAST:event_fieldDepartmentActionPerformed
 
-    private void fieldStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldStudentIdActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldStudentIdActionPerformed
+        boolean successfullStudentAppend = false;
+        int confirmationResponse;
+        try
+        {
+            confirmationResponse = JOptionPane.showConfirmDialog(this, "Do you want to add this student?", "Confirmation Dialog", JOptionPane.YES_NO_OPTION);
+        }catch(Exception e)
+        {
+            return;
+        }
+        if(confirmationResponse!=JOptionPane.YES_OPTION)
+        {
+            return;
+        }
+        
+        try 
+        {
+            database.readFromFile();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            showHome();
+        }
 
-    private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnMaleActionPerformed
+        if( nameVerifier.verify(fieldFullName)&&
+            departmentVerifier.verify(fieldDepartment))
+        {
+            this.fullName = fieldFullName.getText();
+            this.department = fieldDepartment.getText();
+            if(this.automateId)
+            {
+                database.addStudent(fullName, age, gender, department, GPA);
+                successfullStudentAppend =true;
+            }
+            else if(idVerifier.verify(fieldStudentId))
+            {
+                this.studentId = fieldStudentId.getText();
+                database.addStudent(Integer.parseInt(studentId), fullName, age, gender, department, GPA);
+                successfullStudentAppend =true;
+            }
+            
+        }
+        try {
+            database.saveToFile();
+            if(successfullStudentAppend ==true)
+            {
+                JOptionPane.showMessageDialog(this, "Student has been added successfully","Successful Operation!", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            showHome();
+        }
+        
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnFemaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFemaleActionPerformed
         // TODO add your handling code here:
+        if(btnFemale.isSelected())
+        {
+            this.gender="female";
+        }
+        else
+        {
+            this.gender ="male";
+        }
     }//GEN-LAST:event_btnFemaleActionPerformed
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+    private void btnMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_updateButtonActionPerformed
+        if(btnMale.isSelected())
+        {
+            this.gender="male";
+        }
+        else
+        {
+            this.gender ="female";
+        }
+    }//GEN-LAST:event_btnMaleActionPerformed
 
-    private void fieldDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDepartmentActionPerformed
+    private void fieldStudentIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldStudentIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldDepartmentActionPerformed
+        if(idVerifier.verify(fieldStudentId))
+        {
+            this.studentId = fieldStudentId.getText();
+            btnMale.requestFocus();
+        }
+        else
+        {
+            fieldStudentId.requestFocus();
+        }
+    }//GEN-LAST:event_fieldStudentIdActionPerformed
+
+    private void fieldFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldFullNameActionPerformed
+        // TODO add your handling code here:
+        if(nameVerifier.verify(fieldFullName))
+        {
+            this.fullName = fieldFullName.getText();
+            fieldStudentId.requestFocus();
+        }
+        else
+        {
+            fieldFullName.requestFocus();
+        }
+    }//GEN-LAST:event_fieldFullNameActionPerformed
+
+    private void btnAutomateIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAutomateIdActionPerformed
+        // TODO add your handling code here:
+        fieldStudentId.setVisible(!btnAutomateId.isSelected());
+        automateId = btnAutomateId.isSelected();
+    }//GEN-LAST:event_btnAutomateIdActionPerformed
+
+    private void spinnerAgeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerAgeStateChanged
+        // TODO add your handling code here:
+        this.age = (int)spinnerAge.getValue();
+    }//GEN-LAST:event_spinnerAgeStateChanged
+
+    private void spinnerGPAStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spinnerGPAStateChanged
+        // TODO add your handling code here:
+        this.GPA = (double)spinnerGPA.getValue();
+    }//GEN-LAST:event_spinnerGPAStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Title;
-    private javax.swing.JLabel age;
+    private javax.swing.JButton btnAdd;
     private javax.swing.JRadioButton btnAutomateId;
     private javax.swing.JRadioButton btnFemale;
     private javax.swing.JRadioButton btnMale;
-    private javax.swing.JLabel depratment;
     private javax.swing.JTextField fieldDepartment;
     private javax.swing.JTextField fieldFullName;
     private javax.swing.JTextField fieldStudentId;
-    private javax.swing.JLabel fullName;
-    private javax.swing.JLabel gender;
     private javax.swing.ButtonGroup genderBtn;
-    private javax.swing.JLabel gpa;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelAge;
+    private javax.swing.JLabel labelDepartment;
+    private javax.swing.JLabel labelFullName;
+    private javax.swing.JLabel labelGPA;
+    private javax.swing.JLabel labelGender;
+    private javax.swing.JLabel labelStudentId;
     private javax.swing.JButton showHome;
     private javax.swing.JSpinner spinnerAge;
     private javax.swing.JSpinner spinnerGPA;
-    private javax.swing.JLabel studentId;
-    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 
     public final void showHome() {

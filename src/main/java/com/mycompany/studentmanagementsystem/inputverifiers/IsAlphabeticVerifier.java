@@ -26,13 +26,13 @@ public class IsAlphabeticVerifier extends InputVerifier{
         int validationResult = Validation.isAlphabetic(field.getText());
         if(validationResult==-1)
         {
-            JOptionPane.showMessageDialog(input, fieldName+"cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(input, fieldName+" MUST not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         
         if(validationResult == 0)
         {
-            JOptionPane.showMessageDialog(input, fieldName+"MUST be alphabetical only", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(input, fieldName+" MUST be alphabetical only", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         

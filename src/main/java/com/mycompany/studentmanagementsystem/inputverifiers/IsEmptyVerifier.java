@@ -25,7 +25,7 @@ public class IsEmptyVerifier extends InputVerifier{
         JTextField field=(JTextField) input;
         if(Validation.isEmpty(field.getText()))
         {
-            JOptionPane.showMessageDialog(input, fieldName+"cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(input, fieldName+" MUST not be empty!", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
