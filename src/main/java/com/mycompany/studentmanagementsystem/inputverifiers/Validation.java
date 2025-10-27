@@ -2,15 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.studentmanagementsystem;
+package com.mycompany.studentmanagementsystem.inputverifiers;
 
 /**
  *
  * @author Hazem
  */
 public class Validation {
-    public static boolean notEmpty(String value) {
-        return !(value == null || value.trim().isEmpty());
+    public static boolean isEmpty(String value) {
+        return (value == null || value.trim().isEmpty());
     }
     
     /**
@@ -21,13 +21,9 @@ public class Validation {
      *          1: is Alphabetic
      */
     public static int isAlphabetic(String value) {
-        if (value == null) {
-            return -1;
-        }
-        value = value.trim();
-        if(value.equals(""))
+        if(isEmpty(value))
         {
-            return 0;
+            return -1;
         }
         for (int i = 0; i < value.length(); i++) {
             char c = value.charAt(i);
@@ -62,6 +58,10 @@ public class Validation {
     }
     
     public static boolean isInt(String str) {
+        if(isEmpty(str))
+        {
+            return false;
+        }
         try
         {
             Integer.parseInt(str);
@@ -74,6 +74,10 @@ public class Validation {
     }
     
     public static boolean isFloat(String str) {
+        if(isEmpty(str))
+        {
+            return false;
+        }
         try
         {
             Double.parseDouble(str);
@@ -92,6 +96,24 @@ public class Validation {
     
     public static boolean isAge(int age)
     {
-        return age>0;
+        return isPositiveInt(age);
+    }
+    
+    public static boolean isGPA(String GPA)
+    {
+        if(!isFloat(GPA))
+        {
+            return false;
+        }
+        return isGPA(Double.parseDouble(GPA));
+    }
+    
+    public static boolean isAge(String age)
+    {
+        if(!isInt(age))
+        {
+            return false;
+        }
+        return isAge(Integer.parseInt(age));
     }
 }
