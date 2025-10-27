@@ -1,32 +1,30 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package studentmanagment.gui.delete;
 
 import com.mycompany.studentmanagementsystem.Student;
+import com.mycompany.studentmanagementsystem.StudentManagementSystem;
+import com.mycompany.studentmanagementsystem.database.StudentDatabase;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import com.mycompany.studentmanagementsystem.database.StudentDatabase;
-import java.io.FileNotFoundException;
-import java.util.List;
 
 /**
  *
  * @author HP
  */
-public class DeleteStudentFrame extends javax.swing.JFrame {
-     private StudentDatabase manager;
-       
+public class Delete extends javax.swing.JPanel {
 
     /**
-     * Creates new form DeleteStudentFrame
+     * Creates new form Delete
      */
-    public DeleteStudentFrame() throws FileNotFoundException {
+    private StudentManagementSystem manager; 
+    public Delete() {
         initComponents();
-        manager=new StudentDatabase("Students.txt");
-        
-        loadStudents(); 
+        manager = new StudentManagementSystem ();
+        loadStudents();
     }
 
     /**
@@ -38,27 +36,10 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -74,7 +55,6 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(studentsTable);
-        studentsTable.getAccessibleContext().setAccessibleName("");
 
         deleteButton.setText("Delete Selected");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -101,11 +81,11 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -116,45 +96,39 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-         int selectedRow = studentsTable.getSelectedRow();
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Please select a student you want to delete");
-        return;
-    }
+        int selectedRow = studentsTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a student you want to delete");
+            return;
+        }
 
-    int confirm = JOptionPane.showConfirmDialog(this,
+        int confirm = JOptionPane.showConfirmDialog(this,
             "Are you sure you want to delete this student?",
             "Confirm Deletion",
             JOptionPane.YES_NO_OPTION);
 
-    if (confirm == JOptionPane.YES_OPTION) {
-        try {
-            int id = Integer.parseInt(studentsTable.getValueAt(selectedRow, 0).toString());
-            boolean deleted = manager.deleteStudentById(id);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                int id = Integer.parseInt(studentsTable.getValueAt(selectedRow, 0).toString());
+                boolean deleted = manager.deleteStudentById(id);
 
-            if (deleted) {
-                JOptionPane.showMessageDialog(this, "Student deleted successfully!");
-                manager.saveToFile(); 
-                loadStudents();
-            } else {
-                JOptionPane.showMessageDialog(this, "Failed to delete student.");
+                if (deleted) {
+                    JOptionPane.showMessageDialog(this, "Student deleted successfully!");
+                    manager.saveToFile();
+                    loadStudents();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Failed to delete student.");
+                }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
             }
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
-    }
-        
-    
-        
-            
-        
+
     }//GEN-LAST:event_deleteButtonActionPerformed
     private void loadStudents() {
         DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();
@@ -172,48 +146,11 @@ public class DeleteStudentFrame extends javax.swing.JFrame {
             });
         }
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DeleteStudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new DeleteStudentFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable studentsTable;
     // End of variables declaration//GEN-END:variables
 }
