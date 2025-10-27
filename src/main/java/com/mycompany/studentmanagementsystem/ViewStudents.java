@@ -166,6 +166,21 @@ public final class ViewStudents extends javax.swing.JPanel {
         SwitchPanels.showHome(mainFrame);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void refreshData() {
+    try {
+        studentDatabase.readFromFile(); // Re-read the file
+        LoadData.loadStudentsIntoTable(studentDatabase.returnAllStudents(), model);
+    } catch (FileNotFoundException ex) {
+        ex.printStackTrace();
+        javax.swing.JOptionPane.showMessageDialog(
+            this,
+            "Could not load students from file.",
+            "File Error",
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+    }
+}
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

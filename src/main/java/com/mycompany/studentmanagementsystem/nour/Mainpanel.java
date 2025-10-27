@@ -276,12 +276,13 @@ public class Mainpanel extends javax.swing.JPanel {
     private void btnViewStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewStudentsActionPerformed
         // TODO add your handling code here:
         parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "viewStudents");
-
+        parentFrame.getViewStudentsPanel().refreshData();
     }//GEN-LAST:event_btnViewStudentsActionPerformed
 
     private void btnUpdateStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStudentActionPerformed
         // TODO add your handling code here:
         parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "searchAndUpdate");
+        parentFrame.getSearchAndUpdatePanel().refreshData();
 
     }//GEN-LAST:event_btnUpdateStudentActionPerformed
 

@@ -472,6 +472,30 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(this, "Not found");
     }
 
+    public void refreshData() {
+        try {
+            studentDatabase.readFromFile(); // Re-read the file
+            LoadData.loadStudentsIntoTable(studentDatabase.returnAllStudents(), model);
+            // Optional: clear search field and hide update form
+            searchField.setText("");
+            updateForm.setVisible(false);
+            // Reset highlight state
+            if (isHighlighted) {
+                students.setSelectionBackground(originalSelectionColor);
+                students.clearSelection();
+                isHighlighted = false;
+            }
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Could not reload student data from file.",
+                    "File Error",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField age;
     private javax.swing.JTextField department;
