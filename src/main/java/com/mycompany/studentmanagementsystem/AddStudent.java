@@ -54,7 +54,7 @@ public class AddStudent extends javax.swing.JPanel {
         fieldStudentId.setInputVerifier(idVerifier);
         
         showHome.setVerifyInputWhenFocusTarget(false); //very very important if you are willing to use inputVerifiers
-        
+        btnAutomateId.setVerifyInputWhenFocusTarget(false);
     }
 
     /**

@@ -35,7 +35,7 @@ public class IsUniqueIdVerifier extends IsIdVerifier{
                 JOptionPane.showMessageDialog(input,e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            if(database.searchStudent(field.getText())==null)
+            if(database.searchStudent(Integer.parseInt(field.getText()))==null)
             {
                 return true;
             }
