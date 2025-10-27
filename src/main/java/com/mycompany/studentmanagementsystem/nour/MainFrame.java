@@ -4,6 +4,7 @@
  */
 package com.mycompany.studentmanagementsystem.nour;
 
+import com.mycompany.studentmanagementsystem.AddStudent;
 import com.mycompany.studentmanagementsystem.SearchAndUpdate;
 import com.mycompany.studentmanagementsystem.ViewStudents;
 import java.awt.BorderLayout;
@@ -28,7 +29,8 @@ public class MainFrame extends javax.swing.JFrame {
     private Mainpanel homePanel;
     private ViewStudents viewStudentsPanel;
     private SearchAndUpdate searchAndUpdatePanel;
-
+    private AddStudent addStudentPanel;
+    
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
     /**
@@ -62,6 +64,9 @@ public class MainFrame extends javax.swing.JFrame {
         searchAndUpdatePanel = new SearchAndUpdate(this);
         mainPanel.add(searchAndUpdatePanel, "searchAndUpdate");
 
+        addStudentPanel = new AddStudent(this);
+        mainPanel.add(addStudentPanel,"addStudent");
+        
         loginPanel.getLoginButton().addActionListener(e -> {
             String username = loginPanel.getUsername();
             String password = loginPanel.getPassword();
@@ -182,6 +187,11 @@ public class MainFrame extends javax.swing.JFrame {
         return searchAndUpdatePanel;
     }
 
+    
+    public AddStudent getAddStudentPanel()
+    {
+        return addStudentPanel;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
