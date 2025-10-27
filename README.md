@@ -1,3 +1,5 @@
+> Note: Contribution stats are inflated due to folder restructuring. 
+
 # Student Management System
 
 A small Java desktop application for managing student records (view, search, and update) built with standard Java and Swing UI components. This repository contains the source code, a simple file-based student database, and several Swing forms used for the app's UI.
