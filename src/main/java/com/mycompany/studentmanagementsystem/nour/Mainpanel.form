@@ -142,6 +142,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Delete Student"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteStudentActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

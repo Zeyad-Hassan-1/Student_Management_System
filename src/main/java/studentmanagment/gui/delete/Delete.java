@@ -4,9 +4,12 @@
  */
 package studentmanagment.gui.delete;
 
+import com.mycompany.studentmanagementsystem.Shared.FormatTable;
+import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
 import com.mycompany.studentmanagementsystem.Student;
-import com.mycompany.studentmanagementsystem.StudentManagementSystem;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
+import com.mycompany.studentmanagementsystem.nour.MainFrame;
+import java.io.FileNotFoundException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,11 +23,18 @@ public class Delete extends javax.swing.JPanel {
     /**
      * Creates new form Delete
      */
-    private StudentManagementSystem manager; 
-    public Delete() {
+    private MainFrame mainFrame;
+
+    private StudentDatabase manager;
+
+    public Delete(MainFrame mainFrame) throws FileNotFoundException {
+        this.mainFrame = mainFrame;
         initComponents();
-        manager = new StudentManagementSystem ();
+        manager = new StudentDatabase("students.txt");
         loadStudents();
+        
+        FormatTable.center(studentsTable);
+        FormatTable.customizeSorter(studentsTable);
     }
 
     /**
@@ -40,20 +50,26 @@ public class Delete extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         studentsTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
+        studentsTable.setBackground(new java.awt.Color(49, 51, 53));
+        studentsTable.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        studentsTable.setForeground(new java.awt.Color(255, 255, 255));
         studentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Full Name", "Age", "Gender", "Department"
+                "ID", "Full Name", "Age", "Gender", "Department", "GPA"
             }
         ));
+        studentsTable.setRowHeight(40);
+        studentsTable.setShowGrid(true);
         jScrollPane2.setViewportView(studentsTable);
 
         deleteButton.setText("Delete Selected");
@@ -63,39 +79,37 @@ public class Delete extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(deleteButton)
+                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 33, Short.MAX_VALUE))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        add(jPanel1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -107,9 +121,9 @@ public class Delete extends javax.swing.JPanel {
         }
 
         int confirm = JOptionPane.showConfirmDialog(this,
-            "Are you sure you want to delete this student?",
-            "Confirm Deletion",
-            JOptionPane.YES_NO_OPTION);
+                "Are you sure you want to delete this student?",
+                "Confirm Deletion",
+                JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
             try {
@@ -130,9 +144,14 @@ public class Delete extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        SwitchPanels.showHome(mainFrame);
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void loadStudents() {
         DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();
-        model.setRowCount(0); 
+        model.setRowCount(0);
 
         List<Student> students = manager.returnAllStudents();
         for (Student s : students) {
@@ -149,6 +168,7 @@ public class Delete extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable studentsTable;

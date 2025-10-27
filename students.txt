@@ -6,6 +6,5 @@
 9783,Ahmed Samir,24,male,MEC,3.78
 9784,Nourhan Said,20,female,CSE,3.95
 9785,Karim Hossam,22,male,EEC,3.4
-9786,Sara Tarek,21,female,CCE,3.88
 9787,Youssef Nabil,23,male,CCE,3.6
 9255,Hazem Essam Elsayed,20,male,CCE,3.92

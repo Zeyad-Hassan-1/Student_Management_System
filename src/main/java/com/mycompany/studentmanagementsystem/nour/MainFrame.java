@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import studentmanagment.gui.delete.Delete;
 
 /**
  *
@@ -30,6 +31,7 @@ public class MainFrame extends javax.swing.JFrame {
     private ViewStudents viewStudentsPanel;
     private SearchAndUpdate searchAndUpdatePanel;
     private AddStudent addStudentPanel;
+    private Delete delete;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(MainFrame.class.getName());
 
@@ -66,6 +68,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         addStudentPanel = new AddStudent(this);
         mainPanel.add(addStudentPanel,"addStudent");
+        
+        delete = new Delete(this);
+        mainPanel.add(delete,"delete");
         
         loginPanel.getLoginButton().addActionListener(e -> {
             String username = loginPanel.getUsername();

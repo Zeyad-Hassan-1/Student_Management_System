@@ -198,6 +198,11 @@ public class Mainpanel extends javax.swing.JPanel {
 
         btnDeleteStudent.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnDeleteStudent.setText("Delete Student");
+        btnDeleteStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteStudentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -255,7 +260,7 @@ public class Mainpanel extends javax.swing.JPanel {
 
     private void btnAddStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStudentActionPerformed
         // TODO add your handling code here:
-        parentFrame.getCardLayout().show(parentFrame.getMainPanel(),"addStudent");
+        parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "addStudent");
     }//GEN-LAST:event_btnAddStudentActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -285,6 +290,12 @@ public class Mainpanel extends javax.swing.JPanel {
         parentFrame.getSearchAndUpdatePanel().refreshData();
 
     }//GEN-LAST:event_btnUpdateStudentActionPerformed
+
+    private void btnDeleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteStudentActionPerformed
+        // TODO add your handling code here:
+        parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "delete");
+
+    }//GEN-LAST:event_btnDeleteStudentActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
