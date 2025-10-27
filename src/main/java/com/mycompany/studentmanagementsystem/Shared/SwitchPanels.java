@@ -4,7 +4,7 @@
  */
 package com.mycompany.studentmanagementsystem.Shared;
 
-import com.mycompany.studentmanagementsystem.nour.MainFrame;
+import com.mycompany.studentmanagementsystem.frontend.home.MainFrame;
 
 /**
  *

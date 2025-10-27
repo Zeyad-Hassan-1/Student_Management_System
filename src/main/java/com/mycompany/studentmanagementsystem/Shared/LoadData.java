@@ -4,7 +4,7 @@
  */
 package com.mycompany.studentmanagementsystem.Shared;
 
-import com.mycompany.studentmanagementsystem.Student;
+import com.mycompany.studentmanagementsystem.frontend.Student;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 

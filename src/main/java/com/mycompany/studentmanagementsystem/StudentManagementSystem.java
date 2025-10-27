@@ -3,7 +3,7 @@
  */
 package com.mycompany.studentmanagementsystem;
 
-import com.mycompany.studentmanagementsystem.nour.MainFrame;
+import com.mycompany.studentmanagementsystem.frontend.home.MainFrame;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.io.FileNotFoundException;
 

@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package studentmanagment.gui.delete;
+package com.mycompany.studentmanagementsystem.frontend.delete;
 
 import com.mycompany.studentmanagementsystem.Shared.FormatTable;
 import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
-import com.mycompany.studentmanagementsystem.Student;
+import com.mycompany.studentmanagementsystem.frontend.Student;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
-import com.mycompany.studentmanagementsystem.nour.MainFrame;
+import com.mycompany.studentmanagementsystem.frontend.home.MainFrame;
 import java.io.FileNotFoundException;
 import java.util.List;
 import javax.swing.JOptionPane;

@@ -4,7 +4,7 @@
  */
 package com.mycompany.studentmanagementsystem.database;
 
-import com.mycompany.studentmanagementsystem.Student;
+import com.mycompany.studentmanagementsystem.frontend.Student;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

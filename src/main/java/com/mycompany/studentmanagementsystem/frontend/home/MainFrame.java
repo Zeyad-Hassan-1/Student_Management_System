@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.studentmanagementsystem.nour;
+package com.mycompany.studentmanagementsystem.frontend.home;
 
-import com.mycompany.studentmanagementsystem.AddStudent;
-import com.mycompany.studentmanagementsystem.SearchAndUpdate;
-import com.mycompany.studentmanagementsystem.ViewStudents;
+import com.mycompany.studentmanagementsystem.frontend.AddStudent;
+import com.mycompany.studentmanagementsystem.frontend.SearchAndUpdate;
+import com.mycompany.studentmanagementsystem.frontend.ViewStudents;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import studentmanagment.gui.delete.Delete;
+import com.mycompany.studentmanagementsystem.frontend.delete.Delete;
 
 /**
  *
@@ -104,7 +104,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 700));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         pack();
