@@ -1,4 +1,4 @@
-9778,Zeyad Hassan,20,male,CCE,3.7
+9778,Zeyad Hasan,21,male,CCE,3.66
 9779,Mohamed Ali,22,male,CSE,3.85
 9780,Radwa Ahmed,21,female,EEC,3.92
 9781,Layla Mahmoud,23,female,MEC,3.65

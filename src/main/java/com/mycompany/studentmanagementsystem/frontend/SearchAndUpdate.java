@@ -10,6 +10,10 @@ import com.mycompany.studentmanagementsystem.Shared.LoadData;
 import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
 import com.mycompany.studentmanagementsystem.frontend.home.MainFrame;
+import com.mycompany.studentmanagementsystem.inputverifiers.IsAlphabeticVerifier;
+import com.mycompany.studentmanagementsystem.inputverifiers.IsEmptyVerifier;
+import com.mycompany.studentmanagementsystem.validitions.AgeValidation;
+import com.mycompany.studentmanagementsystem.validitions.GpaValidation;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
@@ -201,6 +205,7 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         updateForm.add(id, gridBagConstraints);
 
+        fullName.setInputVerifier(new IsAlphabeticVerifier("Name"));
         fullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fullNameActionPerformed(evt);
@@ -210,6 +215,8 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         gridBagConstraints.gridx = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         updateForm.add(fullName, gridBagConstraints);
+
+        age.setInputVerifier(new AgeValidation());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -222,6 +229,8 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         updateForm.add(gender, gridBagConstraints);
+
+        gpa.setInputVerifier(new GpaValidation());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -271,6 +280,7 @@ public final class SearchAndUpdate extends javax.swing.JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         updateForm.add(jLabel5, gridBagConstraints);
 
+        department.setInputVerifier(new IsEmptyVerifier("Department"));
         department.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 departmentActionPerformed(evt);
