@@ -5,6 +5,7 @@
 package com.mycompany.studentmanagementsystem.frontend.delete;
 
 import com.mycompany.studentmanagementsystem.Shared.FormatTable;
+import com.mycompany.studentmanagementsystem.Shared.LoadData;
 import com.mycompany.studentmanagementsystem.Shared.SwitchPanels;
 import com.mycompany.studentmanagementsystem.frontend.Student;
 import com.mycompany.studentmanagementsystem.database.StudentDatabase;
@@ -24,15 +25,16 @@ public class Delete extends javax.swing.JPanel {
      * Creates new form Delete
      */
     private MainFrame mainFrame;
-
     private StudentDatabase manager;
+    DefaultTableModel model;
 
     public Delete(MainFrame mainFrame) throws FileNotFoundException {
         this.mainFrame = mainFrame;
         initComponents();
         manager = new StudentDatabase("students.txt");
-        loadStudents();
-        
+        manager.readFromFile();
+        this.model = (DefaultTableModel) studentsTable.getModel();
+        LoadData.loadStudentsIntoTable(manager.returnAllStudents(), model);
         FormatTable.center(studentsTable);
         FormatTable.customizeSorter(studentsTable);
     }
@@ -133,7 +135,7 @@ public class Delete extends javax.swing.JPanel {
                 if (deleted) {
                     JOptionPane.showMessageDialog(this, "Student deleted successfully!");
                     manager.saveToFile();
-                    loadStudents();
+                    LoadData.loadStudentsIntoTable(manager.returnAllStudents(), model);
                 } else {
                     JOptionPane.showMessageDialog(this, "Failed to delete student.");
                 }
@@ -149,20 +151,35 @@ public class Delete extends javax.swing.JPanel {
         // TODO add your handling code here:
         SwitchPanels.showHome(mainFrame);
     }//GEN-LAST:event_jButton1ActionPerformed
-    private void loadStudents() {
-        DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();
-        model.setRowCount(0);
+//    public void loadStudents() {
+//        DefaultTableModel model = (DefaultTableModel) studentsTable.getModel();
+//        model.setRowCount(0);
+//
+//        List<Student> students = manager.returnAllStudents();
+//        for (Student s : students) {
+//            model.addRow(new Object[]{
+//                s.getStudentId(),
+//                s.getFullName(),
+//                s.getAge(),
+//                s.getGender(),
+//                s.getDepartment(),
+//                s.getGPA()
+//            });
+//        }
+//    }
 
-        List<Student> students = manager.returnAllStudents();
-        for (Student s : students) {
-            model.addRow(new Object[]{
-                s.getStudentId(),
-                s.getFullName(),
-                s.getAge(),
-                s.getGender(),
-                s.getDepartment(),
-                s.getGPA()
-            });
+    public void refreshData() {
+        try {
+            manager.readFromFile(); // Re-read the file
+            LoadData.loadStudentsIntoTable(manager.returnAllStudents(), model);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(
+                    this,
+                    "Could not load students from file.",
+                    "File Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 

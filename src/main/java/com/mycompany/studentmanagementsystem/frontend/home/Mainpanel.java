@@ -294,7 +294,7 @@ public class Mainpanel extends javax.swing.JPanel {
     private void btnDeleteStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteStudentActionPerformed
         // TODO add your handling code here:
         parentFrame.getCardLayout().show(parentFrame.getMainPanel(), "delete");
-
+        parentFrame.getDelete().refreshData();
     }//GEN-LAST:event_btnDeleteStudentActionPerformed
 
 

@@ -24,6 +24,13 @@ import com.mycompany.studentmanagementsystem.frontend.delete.Delete;
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    /**
+     * @return the delete
+     */
+    public Delete getDelete() {
+        return delete;
+    }
+
     private CardLayout cardLayout;
     private JPanel mainPanel;
     private LoginPanel loginPanel;
